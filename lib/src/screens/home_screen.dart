@@ -5,7 +5,7 @@ class HomeScreen extends StatelessWidget {
   //const HomeScreen({super.key});
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
       'Index 0: Home',
@@ -22,27 +22,78 @@ class HomeScreen extends StatelessWidget {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+   
+    _selectedIndex = index;
+    
   }
 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('zz')),
-      
+      appBar: AppBar(
+        title: const Text(''),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0.0,
+        actions: [
+          IconButton(
+            style: TextButton.styleFrom(padding: EdgeInsets.fromLTRB(0, 0, 10, 0)),
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              // Handle the search button press
+            },
+          ),
+        ],
+        
+      ),
+        
+      drawer: Drawer(
+        
+        surfaceTintColor: Colors.red,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Drawer Header'),
+            ),
+            ListTile(
+              title: const Text('Home'),
+              selected: _selectedIndex == 0,
+              onTap: () {
+                _onItemTapped(0);
+              },
+            ),
+            ListTile(
+              title: const Text('Business'),
+              selected: _selectedIndex == 1,
+              onTap: () {
+                _onItemTapped(1);
+              },
+            ),
+            ListTile(
+              title: const Text('School'),
+              selected: _selectedIndex == 2,
+              onTap: () {
+                _onItemTapped(2);
+              },
+            ),
+          ],
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            Text('hung')
+            Text('husssng')
         ]),
       ),
     );
   }
   
-  void setState(Null Function() param0) {}
+  //void setState(Null Function() param0) {}
 
 
 }
