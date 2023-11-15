@@ -87,7 +87,24 @@ class HomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Text('husssng')
+            Container(
+              margin: const EdgeInsets.all(14),
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.location_on, color: Colors.black, size: 24,),
+                      Text('Ha Noi', style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),)
+                    ],
+                  ),
+                  Text('Choose your preferred meal', style: TextStyle(color: Color.fromARGB(69, 33, 33, 22), fontSize: 12),),
+                ]
+              ),
+            ),
+            
         ]),
       ),
     );
