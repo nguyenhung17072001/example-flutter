@@ -8,6 +8,7 @@ import '../screens/home_screen.dart';
 class NavigationContainer extends StatelessWidget {
   const NavigationContainer({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +17,7 @@ class NavigationContainer extends StatelessWidget {
         '/': (context) => Splash(),
         '/login': (context) => const LoginScreen(),
         '/my-tab': (context) => const MyTabBar(),
-        '/my-tab/home': (context) => const HomeScreen(),
+        '/my-tab/home': (context) => HomeScreen(),  
       },
     );
   }
@@ -37,7 +38,7 @@ class _MyTabBarPageState extends State<MyTabBar> {
 
   // Danh sách các tab
   final List<Widget> _tabs = [
-    const HomeScreen(),
+    HomeScreen(),
     Tab2(),
     Tab3(),
   ];

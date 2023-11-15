@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import '../components/my_text_field.dart';
-import '../screens/home_screen.dart';
+import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   /// Holds the _category, model of the current selected control
- 
+  
   @override
   State<StatefulWidget> createState() => LayoutPageState();
 }
 
 class LayoutPageState extends State<LoginScreen> {
 
+
   
+  
+
+
+
+
   @override
   Widget build(BuildContext context) {
-
-
-
-
-
+    changeStatusBarColor(const Color.fromRGBO(45, 182, 163, 100));
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -104,4 +106,13 @@ class LayoutPageState extends State<LoginScreen> {
   }
 
 }
+
+void changeStatusBarColor(Color color) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: color,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+  }
 
