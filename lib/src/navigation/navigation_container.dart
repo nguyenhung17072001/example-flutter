@@ -74,15 +74,7 @@ class _MyTabBarPageState extends State<MyTabBar> {
   }
 }
 
-class Tab1 extends StatelessWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Tab 1 Content'),
-    );
-  }
-}
 
 class Tab2 extends StatelessWidget {
   @override
