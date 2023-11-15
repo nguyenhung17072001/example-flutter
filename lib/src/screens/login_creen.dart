@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import '../components/my_text_field.dart';
+
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -7,12 +9,19 @@ class LoginScreen extends StatefulWidget {
   /// Holds the _category, model of the current selected control
  
   @override
-  _LayoutPageState createState() => _LayoutPageState();
+  State<StatefulWidget> createState() => LayoutPageState();
 }
 
-class _LayoutPageState extends State<LoginScreen> {
+class LayoutPageState extends State<LoginScreen> {
+
+  
   @override
   Widget build(BuildContext context) {
+
+
+
+
+
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -27,7 +36,19 @@ class _LayoutPageState extends State<LoginScreen> {
                   width: 300,
                   child: Image.asset('lib/src/assets/images/login.png', fit: BoxFit.contain,),
                 )
-              )
+              ),
+              Container(
+                child: AuthTextField(
+                  icon: const Icon(Icons.mail),
+                  labelText: 'Email',
+                ),
+              ),
+              Container(
+                child: AuthTextField(
+                  icon: const Icon(Icons.mail),
+                  labelText: 'Emailsss',
+                ),
+              ),
             ]
           ),
         )
@@ -36,3 +57,4 @@ class _LayoutPageState extends State<LoginScreen> {
   }
 
 }
+

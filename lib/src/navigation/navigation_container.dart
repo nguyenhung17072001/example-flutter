@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/splash.dart';
-import '../screens//login_creen.dart';
+import '../screens/login_creen.dart';
 class NavigationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class NavigationContainer extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
-        '/login': (context) => LoginScreen(),
+        '/login': (context) => const LoginScreen(),
       },
     );
   }
@@ -23,14 +23,14 @@ class FirstScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Screen'),
+        title: const Text('First Screen'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             Navigator.pushReplacementNamed(context, '/second');
           },
-          child: Text('Go to Second Screen'),
+          child: const Text('Go to Second Screen'),
         ),
       ),
     );
