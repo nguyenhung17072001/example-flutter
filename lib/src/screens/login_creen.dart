@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../components/my_text_field.dart';
-
+import '../screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -89,7 +89,7 @@ class LayoutPageState extends State<LoginScreen> {
                       padding: const EdgeInsets.fromLTRB(60, 15, 60, 15)
                     ),
                     onPressed: () {
-                      //Navigator.pushNamed(context, '/my-tab');
+                      Navigator.pushNamed(context, '/my-tab');
                     }, 
                       child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 14),)
                   ),
