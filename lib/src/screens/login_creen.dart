@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import '../components/my_text_field.dart';
 
 
@@ -28,6 +27,8 @@ class LayoutPageState extends State<LoginScreen> {
           width: double.infinity,
           color: const Color.fromRGBO(45, 182, 163, 100),
           child: Column(
+            mainAxisSize: MainAxisSize.max,
+            
             children: [
               Flexible(
                 
@@ -37,18 +38,64 @@ class LayoutPageState extends State<LoginScreen> {
                   child: Image.asset('lib/src/assets/images/login.png', fit: BoxFit.contain,),
                 )
               ),
-              Container(
-                child: AuthTextField(
-                  icon: const Icon(Icons.mail),
-                  labelText: 'Email',
+              const Flexible(
+                
+                child: Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Text('Welcome', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
                 ),
               ),
               Container(
-                child: AuthTextField(
-                  icon: const Icon(Icons.mail),
-                  labelText: 'Emailsss',
+                child: const AuthTextField(
+                  
+                  icon: Icon(Icons.verified_user, color: Color.fromRGBO(45, 182, 163, 100)),
+                  labelText: 'Username',
                 ),
               ),
+              Container(
+                child: const AuthTextField(
+                  icon: Icon(Icons.lock, color: Color.fromRGBO(45, 182, 163, 100)),
+                  labelText: 'Password',
+                ),
+              ),
+              Flexible(
+                child: Padding(
+                  padding:  const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {}, 
+                        child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 14),)
+                      ),
+                      TextButton(
+                        onPressed: () {}, 
+                        child: const Text('Forgot Password?', style: TextStyle(color: Colors.black, fontSize: 14),)
+                      )
+                    ],
+                  ),
+                )
+              ),
+              Flexible(
+                child: Container(
+                  margin: const EdgeInsets.all(30.0),
+                  height: 60,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(223, 180, 151, 100),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.fromLTRB(60, 15, 60, 15)
+                    ),
+                    onPressed: () {
+                      //Navigator.pushNamed(context, '/my-tab');
+                    }, 
+                      child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 14),)
+                  ),
+                )
+              )
+              
             ]
           ),
         )
