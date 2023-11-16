@@ -9,7 +9,7 @@ class FoodDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('hunnnnnnnnn $params');
+    //print('hunnnnnnnnn $params');
     return Scaffold(
       appBar: AppBar(
         title: Text(params?['name']),
@@ -18,12 +18,18 @@ class FoodDetail extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: const Text('Go back!'),
-        ),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 20),
+              height: 200,
+              width: 200,
+              child: Image.asset(params?['image'], fit: BoxFit.contain,)
+            ),
+            Text(params?['price'], style: TextStyle(fontSize: 14, color: Colors.black),),
+          ],
+          
+        )
       ),
     );
   }
