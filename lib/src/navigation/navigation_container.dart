@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+
 
 import '../screens/splash.dart';
 import '../screens/login_creen.dart';
@@ -61,8 +63,8 @@ class _MyTabBarPageState extends State<MyTabBar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favourite',
+            icon: Icon(CupertinoIcons.cart_fill),
+            label: 'Order',
             
           ),
           BottomNavigationBarItem(

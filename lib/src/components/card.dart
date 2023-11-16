@@ -6,6 +6,7 @@ import '../screens/food_detail.dart';
 class HomeCard extends StatefulWidget {
   final Map? item;
   
+  
   HomeCard({this.item});
 
   @override
@@ -18,13 +19,19 @@ class HomeCard extends StatefulWidget {
 
 class _HomeCardState extends State<HomeCard> {
   late Map _item;
-  
+  late bool isFavourite;
   
   @override
   void initState() {
     super.initState();
     _item = widget.item!;
-    
+    isFavourite = false;
+  }
+
+  handleLike() {
+    setState(() {
+      isFavourite = !isFavourite;
+    });
   }
 
   @override
@@ -46,9 +53,9 @@ class _HomeCardState extends State<HomeCard> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  onPressed: () {}, 
-                  child: const Icon(
-                    CupertinoIcons.heart, 
+                  onPressed: handleLike, 
+                  child: Icon(
+                    isFavourite? CupertinoIcons.heart_fill: CupertinoIcons.heart, 
                     color: Colors.red,
                   )
                 ),
