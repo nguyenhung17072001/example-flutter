@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
+import '../screens/food_detail.dart';
 
 
 class HomeCard extends StatefulWidget {
@@ -30,7 +30,7 @@ class _HomeCardState extends State<HomeCard> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    //print(_item['name'].runtimeType);
+    //print(_item);
     return Container(
       //height: 500,
       margin: const EdgeInsets.fromLTRB(5, 10, 5, 0),
@@ -55,11 +55,19 @@ class _HomeCardState extends State<HomeCard> {
               ],
             ),
             Center(
-              child: Image.asset(_item['image']),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FoodDetail(params: _item)),
+                  );
+                },
+                child: Image.asset(_item['image'])
+              ),
             ),
             Text(_item['name'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,14 +75,12 @@ class _HomeCardState extends State<HomeCard> {
                   Text(_item['price']),
                   IconButton(
                     onPressed: () {}, 
-                    icon: Icon(CupertinoIcons.plus_circle, color: Color.fromRGBO(45, 182, 163, 100),)
+                    icon: const Icon(CupertinoIcons.plus_circle, color: Color.fromRGBO(45, 182, 163, 100),)
                   )
                 ],
               ),
             ),
-            const SizedBox(
-              height: 5,
-            )
+            
           ]
         ),
       ),

@@ -18,6 +18,7 @@ class NavigationContainer extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/my-tab': (context) => const MyTabBar(),
         '/my-tab/home': (context) => HomeScreen(),  
+        //'/my-tab/home/food-detail': (context) => const FoodDetail(),  
       },
     );
   }
