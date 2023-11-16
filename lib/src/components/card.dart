@@ -33,7 +33,7 @@ class _HomeCardState extends State<HomeCard> {
     //print(_item['name'].runtimeType);
     return Container(
       //height: 500,
-      margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+      margin: const EdgeInsets.fromLTRB(5, 10, 5, 0),
       width: screenWidth*0.45,
       child: Material(
         elevation: 2,
@@ -58,10 +58,22 @@ class _HomeCardState extends State<HomeCard> {
               child: Image.asset(_item['image']),
             ),
             Text(_item['name'], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            Row(
-              children: [
-                Text(_item['price'])
-              ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(_item['price']),
+                  IconButton(
+                    onPressed: () {}, 
+                    icon: Icon(CupertinoIcons.plus_circle, color: Color.fromRGBO(45, 182, 163, 100),)
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 5,
             )
           ]
         ),

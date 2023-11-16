@@ -57,16 +57,16 @@ class _MyTabBarPageState extends State<MyTabBar> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Tab 1',
+            label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Tab 2',
+            icon: Icon(Icons.favorite),
+            label: 'Favourite',
             
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Tab 3',
+            label: 'Menu',
           ),
         ],
       ),
