@@ -1,3 +1,4 @@
+import 'package:example/src/screens/oder_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -42,7 +43,7 @@ class _MyTabBarPageState extends State<MyTabBar> {
   // Danh sách các tab
   final List<Widget> _tabs = [
     HomeScreen(),
-    Tab2(),
+    OrderScreen(),
     Tab3(),
   ];
 

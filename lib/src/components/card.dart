@@ -1,5 +1,9 @@
+import 'package:example/flow/blocs/order_bloc.dart';
+import 'package:example/flow/events/order_event.dart';
+import 'package:example/src/models/food.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../screens/food_detail.dart';
 
 
@@ -81,7 +85,9 @@ class _HomeCardState extends State<HomeCard> {
                 children: [
                   Text(_item['price']),
                   IconButton(
-                    onPressed: () {}, 
+                    onPressed: () {
+                      context.read<OrderBloc>().add(OrderEvent(Food(id: _item['id'], name: _item['name'], image: _item['image'], price: _item['price'])));
+                    }, 
                     icon: const Icon(CupertinoIcons.plus_circle, color: Color.fromRGBO(45, 182, 163, 100),)
                   )
                 ],

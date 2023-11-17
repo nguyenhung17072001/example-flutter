@@ -27,6 +27,7 @@ class HomeScreen extends StatelessWidget {
     
   }
 
+
   static const List<Map> data = [
     {
       'id': '1',
