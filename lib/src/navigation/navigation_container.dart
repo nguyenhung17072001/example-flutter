@@ -1,12 +1,13 @@
-import 'package:example/src/screens/oder_screen.dart';
+import '';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 
+import '../screens/menu_screen.dart';
+import '../screens/oder_screen.dart';
 import '../screens/splash.dart';
 import '../screens/login_creen.dart';
 import '../screens/home_screen.dart';
-
 
 class NavigationContainer extends StatelessWidget {
   const NavigationContainer({super.key});
@@ -44,7 +45,7 @@ class _MyTabBarPageState extends State<MyTabBar> {
   final List<Widget> _tabs = [
     HomeScreen(),
     OrderScreen(),
-    Tab3(),
+    MenuScreen(),
   ];
 
   @override
@@ -80,22 +81,6 @@ class _MyTabBarPageState extends State<MyTabBar> {
 
 
 
-class Tab2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Tab 2 Content'),
-    );
-  }
-}
 
-class Tab3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Tab 3 Content'),
-    );
-  }
-}
 
 

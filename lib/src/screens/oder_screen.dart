@@ -21,7 +21,7 @@ class _MyWidgetState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final OrderBloc orderBloc = BlocProvider.of<OrderBloc>(context);
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text('Order'),
