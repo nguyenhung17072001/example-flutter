@@ -1,3 +1,4 @@
+import 'package:example/src/components/photo_view.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,11 +21,21 @@ class FoodDetail extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 20),
-              height: 200,
-              width: 200,
-              child: Image.asset(params?['image'], fit: BoxFit.contain,)
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImageView(image: params?['image']),
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 20),
+                height: 200,
+                width: 200,
+                child: Image.asset(params?['image'], fit: BoxFit.contain,)
+              ),
             ),
             Text(params?['price'], style: TextStyle(fontSize: 14, color: Colors.black),),
           ],

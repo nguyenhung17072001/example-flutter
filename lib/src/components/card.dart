@@ -50,7 +50,6 @@ class _HomeCardState extends State<HomeCard> {
         elevation: 2,
         borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         child: Column(
-          //mainAxisSize: MainAxisSize.max,
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,

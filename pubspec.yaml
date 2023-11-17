@@ -40,6 +40,7 @@ dependencies:
   go_router: ^12.1.1
   flutter_statusbarcolor_ns: ^0.5.0
   equatable: ^2.0.5
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:
