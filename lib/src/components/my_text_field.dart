@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 class AuthTextField extends StatefulWidget {
   final Widget? icon;
   final String? labelText;
+  final bool? obscureText;
   final void Function(String)? onChanged;
 
 
-  const AuthTextField({this.icon, this.labelText, this.onChanged});
+  const AuthTextField({this.icon, this.labelText, this.onChanged, this.obscureText});
    
    
 
@@ -22,6 +23,7 @@ class AuthTextField extends StatefulWidget {
 class _AuthTextFieldState extends State<AuthTextField> {
   late Widget _icon;
   late String _labelText;
+  late bool _obscureText;
   late void Function(String)? _onChanged;
   
   final myController = TextEditingController();
@@ -32,6 +34,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
     _icon = widget.icon ?? const SizedBox(); 
     _labelText = widget.labelText ?? '';
     _onChanged = widget.onChanged;
+    _obscureText = widget.obscureText ?? false;
 
     super.initState();
   }
@@ -43,6 +46,7 @@ class _AuthTextFieldState extends State<AuthTextField> {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: TextField(
+        obscureText: _obscureText,
         onChanged: _onChanged,
         style: const TextStyle(
           color: Color.fromARGB(255, 16, 14, 14),

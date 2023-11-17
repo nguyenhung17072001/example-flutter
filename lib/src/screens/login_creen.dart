@@ -58,6 +58,7 @@ class LayoutPageState extends State<LoginScreen> {
                 child: const AuthTextField(
                   icon: Icon(Icons.lock, color: Color.fromRGBO(45, 182, 163, 100)),
                   labelText: 'Password',
+                  obscureText: true,
                 ),
               ),
               Flexible(
