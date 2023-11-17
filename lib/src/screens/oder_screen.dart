@@ -1,5 +1,6 @@
 import 'package:example/flow/blocs/order_bloc.dart';
 import 'package:example/flow/state/order_state.dart';
+import 'package:example/src/components/photo_view.dart';
 import 'package:example/src/models/food.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,14 +42,24 @@ class _MyWidgetState extends State<OrderScreen> {
                       child: Column(
                         children: state.foods.map((food) {
                           return Container(
-                            margin: const EdgeInsets.all(12),
+                            margin: const EdgeInsets.all(1),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                SizedBox(
-                                  height: 80,
-                                  width: 80,
-                                  child: Image.asset(food.image)
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ImageView(image: food.image),
+                                      ),
+                                    );
+                                  },
+                                  child: SizedBox(
+                                    height: 80,
+                                    width: 80,
+                                    child: Image.asset(food.image)
+                                  ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
@@ -74,7 +85,7 @@ class _MyWidgetState extends State<OrderScreen> {
                 ],
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text("You have not ordered any products yet"),
               );
             }

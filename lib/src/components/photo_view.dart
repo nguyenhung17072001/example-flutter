@@ -19,8 +19,14 @@ class _MyWidgetState extends State<ImageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PhotoView(
-        imageProvider: AssetImage(_image),
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+      
+        child: PhotoView(
+          imageProvider: AssetImage(_image),
+        ),
       ),
     );
   }

@@ -37,7 +37,7 @@ class FoodDetail extends StatelessWidget {
                 child: Image.asset(params?['image'], fit: BoxFit.contain,)
               ),
             ),
-            Text(params?['price'], style: TextStyle(fontSize: 14, color: Colors.black),),
+            Text(params?['price'], style: const TextStyle(fontSize: 14, color: Colors.black),),
           ],
           
         )
