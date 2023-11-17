@@ -26,31 +26,30 @@ class _MyWidgetState extends State<OrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<OrderBloc, OrderState>(
-      listener: (context, state) {
-        
-
-        if(state is OrderStateSuccess) {
-          setState(() {
-            foods = state.foods;
-          });
-
-        }
-
-        print('data======sdsdsdsdsdsdsd=====: ${foods}');
-      },
-      child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Order'),
-        centerTitle: true,
-        backgroundColor: const Color.fromRGBO(45, 182, 163, 100),
-        //iconTheme: const IconThemeData(color: Colors.black),
-        //actions: [],
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-      ),
-      body: Text('hung dep tai')
+    final OrderBloc orderBloc = BlocProvider.of<OrderBloc>(context);
+    return Scaffold(
+    appBar: AppBar(
+      title: const Text('Order'),
+      centerTitle: true,
+      backgroundColor: const Color.fromRGBO(45, 182, 163, 100),
+      //iconTheme: const IconThemeData(color: Colors.black),
+      //actions: [],
+      automaticallyImplyLeading: false,
+      elevation: 0.0,
     ),
+    body: BlocBuilder<OrderBloc, OrderState>(
+      builder: (context, state) {
+        if (state is OrderStateSuccess) {
+          return Column(
+            children: [
+              
+            ],
+          );
+        } else {
+          return Text("You have not ordered any products yet");
+        }
+      },
+    )
     );
   }
 }
