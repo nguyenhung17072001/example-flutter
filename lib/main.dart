@@ -8,7 +8,6 @@ import 'src/navigation/navigation_container.dart';
 
 void main() {
   Bloc.observer = BlocObserver2();
-
   runApp(MyApp());
 }
 
@@ -16,9 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(
-        create: (context)=>OrderBloc(),
-      )],
+      providers: [
+        BlocProvider(
+          create: (context)=>OrderBloc(),
+        ),
+        
+      ],
       child: MaterialApp(
       home: NavigationContainer(),
     ),

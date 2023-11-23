@@ -11,6 +11,7 @@ List<Food> foods= [];
 class OrderBloc extends Bloc<OrderEvent, OrderState> {
   OrderBloc():super(OrderStateInitial(foods)){
     on<OrderEvent>(handleOrderEvent);
+    on<OrderDeleteEvent>(handleOrderDeleteEvent);
   }
 
   
@@ -18,6 +19,15 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   FutureOr<void> handleOrderEvent(OrderEvent event, Emitter<OrderState> emit) async {
     try {
       foods.add(event.food);
+      emit(OrderStateSuccess(foods));
+    } catch (e) {
+      emit(OrderStateFail(e.toString()));
+    }
+  }
+
+  FutureOr<void> handleOrderDeleteEvent(OrderDeleteEvent event, Emitter<OrderState> emit) async {
+    try {
+      foods.removeWhere((food) => food.id == event.foodId); 
       emit(OrderStateSuccess(foods));
     } catch (e) {
       emit(OrderStateFail(e.toString()));

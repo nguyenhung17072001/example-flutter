@@ -13,7 +13,6 @@ class OrderStateInitial extends OrderState {
 
   OrderStateInitial(this.foods);
 
-
   @override
   // TODO: implement props
   List<Object?> get props => [foods];
@@ -38,3 +37,6 @@ class OrderStateFail extends OrderState {
   @override
   List<Object?> get props => [err];
 }
+
+
+
