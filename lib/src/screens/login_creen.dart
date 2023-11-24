@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../components/my_text_field.dart';
 import 'package:flutter/services.dart';
-
+import '../until/http.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -23,6 +23,11 @@ class LayoutPageState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     changeStatusBarColor(const Color.fromRGBO(45, 182, 163, 100));
+
+    APIService.post('https://reqres.in/api/login', body: {"email": "eve.holt@reqres.in",
+    "password": "cityslicka"}).then((res) {
+      print("res================ $res");
+    });
     return Scaffold(
       body: SafeArea(
         child: Container(

@@ -1,4 +1,4 @@
-import '';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -8,6 +8,7 @@ import '../screens/oder_screen.dart';
 import '../screens/splash.dart';
 import '../screens/login_creen.dart';
 import '../screens/home_screen.dart';
+import '../screens/test.dart';
 
 class NavigationContainer extends StatelessWidget {
   const NavigationContainer({super.key});
@@ -45,7 +46,9 @@ class _MyTabBarPageState extends State<MyTabBar> {
   final List<Widget> _tabs = [
     HomeScreen(),
     OrderScreen(),
+    Test(),
     MenuScreen(),
+    
   ];
 
   @override
@@ -61,6 +64,7 @@ class _MyTabBarPageState extends State<MyTabBar> {
         },
         items: const [
           BottomNavigationBarItem(
+            backgroundColor: Colors.red,
             icon: Icon(Icons.home),
             label: 'Home',
           ),
@@ -68,6 +72,10 @@ class _MyTabBarPageState extends State<MyTabBar> {
             icon: Icon(CupertinoIcons.cart_fill),
             label: 'Order',
             
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Test',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
