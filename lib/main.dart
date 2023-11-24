@@ -2,7 +2,7 @@ import 'package:example/flow/blocs/bloc_observer.dart';
 import 'package:example/flow/blocs/order_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'src/screens/splash.dart';
+import 'flow/blocs/authen_bloc.dart';
 import 'src/navigation/navigation_container.dart';
 
 
@@ -19,10 +19,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context)=>OrderBloc(),
         ),
+        BlocProvider(
+          create: (context)=>AuthenBloc(),
+        ),
         
       ],
       child: MaterialApp(
-      home: NavigationContainer(),
+        home: NavigationContainer(),
     ),
     );
   }

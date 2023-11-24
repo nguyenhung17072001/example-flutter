@@ -9,9 +9,9 @@ class APIService {
     Map<String, String> headers = {
       'Content-Type': 'application/json',
     };
-    if (token != null) {
+    /* if (token != null && token != '') {
       headers['Authorization'] = 'Bearer $token';
-    }
+    } */
     return headers;
   }
 
@@ -22,7 +22,7 @@ class APIService {
   }
 
   static Future<dynamic> post(String baseURL, {dynamic body}) async {
-    final Uri uri = Uri.parse(baseURL);
+    final Uri uri = Uri.https(baseURL);
     final response = await http.post(uri, headers: _getHeaders(), body: jsonEncode(body));
     return _handleResponse(response);
   }
