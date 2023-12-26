@@ -1,12 +1,13 @@
 import 'package:example/routes/routes.dart';
+import 'package:example/view/splash/splash.dart';
 import 'package:flutter/material.dart';
 
 
 class AppPage {
   static List pages = [
     RouteModel(
-      AppRoutes.INIT,
-      Container(),
+      AppRoutes.SPLASH,
+      Splash(),
     ),
     RouteModel(
       AppRoutes.MAIN2,

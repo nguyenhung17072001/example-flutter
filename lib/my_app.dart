@@ -15,25 +15,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
-      child: MultiBlocProvider(
-        providers: [
-          /* BlocProvider<AppBloc>(
+      child: //MultiBlocProvider(
+        /* providers: [
+          BlocProvider<AppBloc>(
             create: (BuildContext context) => getIt<AppBloc>(),
-          ), */
-        ],
-        child: MaterialApp(
+          ),
+        ], */
+        MaterialApp(
           title: 'Flutter Demo',
           navigatorKey: NavigatorUtils.instance.navigatorKey,
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: AppRoutes.INIT,
+          initialRoute: AppRoutes.SPLASH,
           routes: {
             for (RouteModel e in AppPage.pages) e.name: (context) => e.page
           },
           navigatorObservers: [AppRouteTracking()],
         ),
-      ),
+     // ),
     );
   }
 }
