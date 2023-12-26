@@ -46,6 +46,7 @@ dependencies:
   intl: ^0.18.1
   cached_network_image: ^3.3.0
   overlay_support: ^2.1.0
+  flutter_native_splash: ^2.3.8
 
 dev_dependencies:
   flutter_test:
@@ -70,8 +71,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  #assets:
-    #- lib/src/assets/images/test.jpg
+  assets:
+    - assets/logo.png
     
 
     #- images/a_dot_ham.jpeg

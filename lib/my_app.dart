@@ -4,16 +4,18 @@ import 'package:example/utils/navigate_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:overlay_support/overlay_support.dart';
-
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'di/injection_container.dart';
 import 'routes/routes.dart';
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return OverlaySupport.global(
       child: //MultiBlocProvider(
         /* providers: [
