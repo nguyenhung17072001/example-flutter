@@ -7,6 +7,7 @@ class TextInput extends StatefulWidget {
   late String? labelText;
   late IconData? icon;
   late TextInputType? keyboardType;
+  late bool? obscureText;
 
   TextInput({
     super.key,  
@@ -14,6 +15,7 @@ class TextInput extends StatefulWidget {
     required this.labelText, 
     this.icon,
     this.keyboardType,
+    this.obscureText,
   });
 
   @override
@@ -25,15 +27,18 @@ class _TextInputState extends State<TextInput> {
   late String? _labelText;
   late IconData? _icon;
   late TextInputType? _keyboardType;
+  late bool _obscureText;
 
   @override
   void initState() {
+    super.initState();
     _controller = widget.controller;
   
     _labelText = widget.labelText;
     _icon = widget.icon;
     _keyboardType = widget.keyboardType;
-    super.initState();
+    _obscureText = widget.obscureText ?? false;
+    
   }
 
   @override
@@ -41,6 +46,7 @@ class _TextInputState extends State<TextInput> {
     return Container(
       margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
       child: TextField(
+        obscureText: _obscureText,
         controller: _controller,
         keyboardType: _keyboardType?? TextInputType.text,
         decoration: InputDecoration(
@@ -51,11 +57,11 @@ class _TextInputState extends State<TextInput> {
           ),
           prefixIcon: Icon(
             _icon,
-            color: AppColors.primaryColor,
+            //color: AppColors.primaryColor,
           ),
           border: const OutlineInputBorder(),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryColor),
+            //borderSide: BorderSide(color: AppColors.primaryColor),
           ),
           enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xffE6E6E6))),

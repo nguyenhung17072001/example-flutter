@@ -12,6 +12,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final TextEditingController _constructionUsernameValue = TextEditingController();
+  final TextEditingController _constructionUPasswordValue = TextEditingController();
 
 
   @override
@@ -40,8 +41,15 @@ class _LoginState extends State<Login> {
                 TextInput(
                   controller: _constructionUsernameValue,
                   labelText: 'Tên đăng nhập',
-                  icon: Icons.business,
-                )
+                  icon: Icons.account_circle,
+                ),
+                TextInput(
+                  controller: _constructionUPasswordValue,
+                  labelText: 'Mật khẩu',
+                  icon: Icons.lock,
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                ),
               ],
             )
           ],
