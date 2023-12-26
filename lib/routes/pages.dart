@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 class AppPage {
   static List pages = [
     RouteModel(
-      AppRoutes.SPLASH,
-      Login(),
+      AppRoutes.INIT,
+      const Login(),
     ),
     RouteModel(
       AppRoutes.MAIN2,

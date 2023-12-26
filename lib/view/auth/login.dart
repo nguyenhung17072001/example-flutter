@@ -4,16 +4,26 @@ class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _MyWidgetState();
+  State<Login> createState() => _LoginState();
 }
 
-class _MyWidgetState extends State<Login> {
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Text('hung'),
-      ),
+      body: Column(
+        children: [
+          Container(
+            height: 300,
+            width: 300,
+            child: Image.asset(
+              'assets/login.png',
+              fit: BoxFit.contain,
+            )
+          ),
+          Text('hung jr')
+        ],
+      )
     );
   }
 }
