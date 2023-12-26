@@ -51,6 +51,23 @@ class _LoginState extends State<Login> {
                   obscureText: true,
                 ),
               ],
+            ),
+            Flexible(
+              child: Container(
+                margin: const EdgeInsets.all(30.0),
+                //height: 60,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:  AppColors.primaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.fromLTRB(60, 15, 60, 15)
+                  ),
+                  onPressed: () {
+                    
+                  }, 
+                  child: const Text('Đăng nhập', style: TextStyle(color: Colors.white, fontSize: 14),)
+                ),
+              )
             )
           ],
         ),
