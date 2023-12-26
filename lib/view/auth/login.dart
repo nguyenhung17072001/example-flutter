@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../theme/index.dart';
+import '../../widgets/index.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -10,6 +11,9 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _constructionUsernameValue = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +26,7 @@ class _LoginState extends State<Login> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
+              margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
               alignment: Alignment.center,
               height: MediaQuery.of(context).size.width *0.5,
               width: MediaQuery.of(context).size.width *0.5,
@@ -30,7 +35,15 @@ class _LoginState extends State<Login> {
                 fit: BoxFit.contain,
               )
             ),
-            Text('hung jr')
+            Column(
+              children: [
+                TextInput(
+                  controller: _constructionUsernameValue,
+                  labelText: 'Tên đăng nhập',
+                  icon: Icons.business,
+                )
+              ],
+            )
           ],
         ),
       )
