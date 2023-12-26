@@ -1,6 +1,6 @@
 import 'package:example/routes/pages.dart';
-import 'package:example/utils/app_route_tracking.dart';
-import 'package:example/utils/navigate_utils.dart';
+import 'package:example/utils/index.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          initialRoute: AppRoutes.SPLASH,
+          initialRoute: AppRoutes.INIT,
           routes: {
             for (RouteModel e in AppPage.pages) e.name: (context) => e.page
           },

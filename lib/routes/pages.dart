@@ -1,5 +1,6 @@
-import 'package:example/routes/routes.dart';
-import 'package:example/view/splash/splash.dart';
+
+import 'package:example/routes/index.dart';
+import 'package:example/view/auth/index.dart';
 import 'package:flutter/material.dart';
 
 
@@ -7,7 +8,7 @@ class AppPage {
   static List pages = [
     RouteModel(
       AppRoutes.SPLASH,
-      Splash(),
+      Login(),
     ),
     RouteModel(
       AppRoutes.MAIN2,
