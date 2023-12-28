@@ -1,3 +1,4 @@
+import 'package:example/bloc/auth/auth_bloc.dart';
 import 'package:example/routes/pages.dart';
 import 'package:example/utils/index.dart';
 
@@ -17,13 +18,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
     return OverlaySupport.global(
-      child: //MultiBlocProvider(
-        /* providers: [
-          BlocProvider<AppBloc>(
-            create: (BuildContext context) => getIt<AppBloc>(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(
+            create: (BuildContext context) => AuthBloc(),
           ),
-        ], */
-        MaterialApp(
+        ], 
+        child: MaterialApp(
           title: 'Flutter Demo',
           navigatorKey: NavigatorUtils.instance.navigatorKey,
           theme: ThemeData(
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           },
           navigatorObservers: [AppRouteTracking()],
         ),
-     // ),
+      ),
     );
   }
 }
