@@ -12,15 +12,15 @@ class User {
     required this.username, 
     required this.token, 
     this.fullName, 
-    this.address,
-    this.images,
-    this.phoneNumber,
-    this.role,
-  })
-  
+    this.phoneNumber, 
+    this.address, 
+    this.images, 
+    this.role
+  });
 
   @override
   String toString() {
+    
     return 'username: $username';
   }
 }
