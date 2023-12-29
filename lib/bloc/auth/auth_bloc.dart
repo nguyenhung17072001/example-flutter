@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         'email': event.username,
         'password': event.password,
       }); */
-      var res = await HttpUtil().post('/v4/api/user/login', {
+      var res = await HttpUtil().post('v4/api/user/login', {
         'username': event.username,
         'password': event.password,
       });

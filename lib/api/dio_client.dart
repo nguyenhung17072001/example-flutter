@@ -31,7 +31,7 @@ class DioClient {
 
   Future postAPI(String unencodedPath, Object body) async {
     var url =
-      Uri.https(rootUrl, unencodedPath);
+      Uri.http(rootUrl, unencodedPath);
     print(url);
   
     try {
