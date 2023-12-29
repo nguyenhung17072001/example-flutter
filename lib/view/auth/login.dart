@@ -17,7 +17,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _constructionUPasswordValue = TextEditingController();
   
   void handleLogin() {
-    //context.read<AuthBloc>().
+    context.read<AuthBloc>().add(LoginEvent(username: _constructionUsernameValue.text, password: _constructionUPasswordValue.text));
   }
 
   @override
@@ -31,7 +31,7 @@ class _LoginState extends State<Login> {
           listeners: [
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
-              print('zzzzzzzz; $state');
+              print('zzzzzzzz; ${state.message}');
               if(state.message=="LoginSuccess") {
                 //Navigator.pushNamed(context, '/my-tab');
               }

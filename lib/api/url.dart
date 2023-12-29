@@ -1,3 +1,4 @@
 class UrlConfig {
-  static String rootUrl = "www.localhost:4000";
+  static String rootUrl = "localhost:4000";
+  
 }
