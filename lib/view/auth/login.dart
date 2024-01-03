@@ -21,6 +21,10 @@ class _LoginState extends State<Login> {
     context.read<AuthBloc>().add(LoginEvent(username: _constructionUsernameValue.text, password: _constructionUPasswordValue.text));
   }
 
+  void handleLoginWithGoogle() {
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -96,15 +100,15 @@ class _LoginState extends State<Login> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AnotherLogin(
-                        backgroundColor: AppColors.primaryColor,
+                        backgroundColor: Color(0xffcb3d2e),
                         textColor: Colors.white,
                         label: 'Google',
-                        onPressed: () {},
+                        onPressed: handleLoginWithGoogle,
                         icon: const FaIcon(FontAwesomeIcons.google),
                       ),
                       AnotherLogin(
                         backgroundColor: AppColors.primaryColor,
-                        textColor: Colors.red,
+                        textColor: Colors.white,
                         label: 'Facebook',
                         onPressed: () {},
                         icon: const Icon(Icons.facebook),
