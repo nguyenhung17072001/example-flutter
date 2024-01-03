@@ -1,6 +1,7 @@
 import 'package:example/bloc/auth/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme/index.dart';
 import '../../widgets/index.dart';
@@ -86,6 +87,31 @@ class _LoginState extends State<Login> {
                       child: const Text('Đăng nhập', style: TextStyle(color: Colors.white, fontSize: 14),)
                     ),
                   )
+                ),
+                const Text("Hoặc"),
+                Flexible(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AnotherLogin(
+                        backgroundColor: AppColors.primaryColor,
+                        textColor: Colors.white,
+                        label: 'Google',
+                        onPressed: () {},
+                        icon: const FaIcon(FontAwesomeIcons.google),
+                      ),
+                      AnotherLogin(
+                        backgroundColor: AppColors.primaryColor,
+                        textColor: Colors.red,
+                        label: 'Facebook',
+                        onPressed: () {},
+                        icon: const Icon(Icons.facebook),
+                      ),
+                      
+                    ],
+                  ),
                 )
               ],
             ),
