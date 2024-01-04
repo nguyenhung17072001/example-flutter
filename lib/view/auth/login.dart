@@ -1,5 +1,6 @@
 import 'package:example/bloc/auth/index.dart';
 import 'package:example/common/function/auth_service.dart';
+import 'package:example/utils/auth_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +23,14 @@ class _LoginState extends State<Login> {
     context.read<AuthBloc>().add(LoginEvent(username: _constructionUsernameValue.text, password: _constructionUPasswordValue.text));
   }
 
-  void handleLoginWithGoogle() {
+  void handleLoginWithGoogle() async {
+    
+    try {
+      await AuthUtils.instance.loginGoogle();
+      
+    } catch (e) {
+      print('Có lỗi xảy ra khi đăng nhập với Google');
+    }
     
   }
 
@@ -104,7 +112,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: Color(0xffcb3d2e),
                         textColor: Colors.white,
                         label: 'Google',
-                        onPressed: () => AuthService().signInWithGoogle(),
+                        onPressed: handleLoginWithGoogle,
                         icon: const FaIcon(FontAwesomeIcons.google),
                       ),
                       AnotherLogin(
