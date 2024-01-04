@@ -1,7 +1,10 @@
 
 import 'package:example/routes/index.dart';
 import 'package:example/view/auth/index.dart';
+import 'package:example/view/main/home.dart';
 import 'package:flutter/material.dart';
+
+
 
 
 class AppPage {
@@ -11,9 +14,10 @@ class AppPage {
       const Login(),
     ),
     RouteModel(
-      AppRoutes.MAIN2,
-      Container(),
+      AppRoutes.MY_TAB,
+      const BottomTab(),
     ),
+    
   ];
 }
 

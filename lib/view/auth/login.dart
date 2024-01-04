@@ -1,6 +1,8 @@
 import 'package:example/bloc/auth/index.dart';
 import 'package:example/common/function/auth_service.dart';
+import 'package:example/routes/index.dart';
 import 'package:example/utils/auth_utils.dart';
+import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -26,10 +28,25 @@ class _LoginState extends State<Login> {
   void handleLoginWithGoogle() async {
     
     try {
-      await AuthUtils.instance.loginGoogle();
+      var result =  await AuthUtils.instance.loginGoogle();
+      print('resultzzzzzzzzzzz: $result');
+      NavigatorUtils.instance.pushReplacementNamed(AppRoutes.MY_TAB);
+
+    } catch (e) {
+      print('Có lỗi xảy ra khi đăng nhập với Google: $e',);
+    }
+    
+  }
+  void handleLoginWithFacebook() async {
+    
+    try {
+      var result =  await AuthUtils.instance.loginFacebook();
+      if(result != null ) {
+        NavigatorUtils.instance.pushReplacementNamed(AppRoutes.MY_TAB);
+      }
       
     } catch (e) {
-      print('Có lỗi xảy ra khi đăng nhập với Google');
+      print('Có lỗi xảy ra khi đăng nhập với Facebook: $e');
     }
     
   }
@@ -119,7 +136,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: AppColors.primaryColor,
                         textColor: Colors.white,
                         label: 'Facebook',
-                        onPressed: () {},
+                        onPressed: handleLoginWithFacebook,
                         icon: const Icon(Icons.facebook),
                       ),
                       

@@ -36,22 +36,15 @@ class AuthUtils {
     return completer.future;
   }
 
-  Future<UserCredential> loginFacebook() async {
-    Completer<UserCredential> completer = Completer();
-    try {
-      LoginResult loginResult = await FacebookAuth.instance.login();
-      final userData = await FacebookAuth.instance.getUserData();
-      final credential =
-          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+  Future<UserCredential?> loginFacebook() async {
+    final LoginResult result = await FacebookAuth.instance.login();
+    if(result.status == LoginStatus.success){
+      // Create a credential from the access token
+      final OAuthCredential credential = FacebookAuthProvider.credential(result.accessToken!.token);
       // Once signed in, return the UserCredential
-      var userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      completer.complete(userCredential);
-    } on Exception catch (e) {
-      completer.completeError(e);
-      print("error$e");
+      return await FirebaseAuth.instance.signInWithCredential(credential);
     }
-    return completer.future;
+    return null;
   }
 
   Future<UserCredential> loginApple() async {

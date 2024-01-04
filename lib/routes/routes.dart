@@ -1,6 +1,8 @@
 class AppRoutes {
-  static const INIT = "/";
+  static const INIT = "/login";
   //static const SPLASH = "/";
 
-  static const MAIN2 = "/main2";
+  static const MY_TAB = "/home";
+  //static const HOME = "/home";
 }
+
