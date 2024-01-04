@@ -1,4 +1,5 @@
 import 'package:example/bloc/auth/index.dart';
+import 'package:example/common/function/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -103,7 +104,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: Color(0xffcb3d2e),
                         textColor: Colors.white,
                         label: 'Google',
-                        onPressed: handleLoginWithGoogle,
+                        onPressed: () => AuthService().signInWithGoogle(),
                         icon: const FaIcon(FontAwesomeIcons.google),
                       ),
                       AnotherLogin(
