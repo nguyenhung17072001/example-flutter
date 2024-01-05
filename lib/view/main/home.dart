@@ -1,3 +1,4 @@
+import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,8 +9,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+
+
+  void testLocalAuth () async{
+    final result = await BiometricUtils.instance.getBiometrics();
+    print("result: $result");
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: SafeArea(
+        child: TextButton(
+          onPressed: testLocalAuth,
+          child: Text('Test Sinh trắc học'),
+        )
+      ),
+    );
   }
 }

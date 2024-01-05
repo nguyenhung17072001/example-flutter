@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
+import 'package:local_auth/local_auth.dart';
+
+
 
 class AuthUtils {
   static final AuthUtils instance = AuthUtils._getInstance();
@@ -91,4 +94,10 @@ class AuthUtils {
     }
     return completer.future;
   }
+
+
+  //Biometric
+
+  
+  
 }

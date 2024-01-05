@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'di/injection_container.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'my_app.dart';
+import 'package:local_auth/local_auth.dart';
 
 
 
@@ -14,6 +15,11 @@ void main() async {
   await Firebase.initializeApp(
     options: FirebaseConfig.android
   );
+
+
+  var canAuthenticate = await BiometricUtils.instance.checkBiometrics();
+  print('canAuthenticateWithBiometrics========: $canAuthenticate');
+
   //const flavor = String.fromEnvironment('flavor', defaultValue: 'dev');
  
   
