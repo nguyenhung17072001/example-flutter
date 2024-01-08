@@ -1,6 +1,7 @@
 
 
 import 'package:example/view/main/home.dart';
+import 'package:example/view/main/timekeeping.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class _BottomTabPageState extends State<BottomTab> {
   // Danh sách các tab
   final List<Widget> _tabs = [
     Home(),
-    Home(),
+    Timekeeping(),
     Home(),
     Home(),
     
@@ -42,8 +43,8 @@ class _BottomTabPageState extends State<BottomTab> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.cart_fill),
-            label: 'Order',
+            icon: Icon(Icons.touch_app),
+            label: 'Attendance',
             
           ),
           BottomNavigationBarItem(

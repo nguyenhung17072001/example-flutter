@@ -19,9 +19,9 @@ void main() async {
 
   var canAuthenticate = await BiometricUtils.instance.checkBiometrics();
   print('canAuthenticateWithBiometrics========: $canAuthenticate');
-
+  
   //const flavor = String.fromEnvironment('flavor', defaultValue: 'dev');
- 
+  
   
 
 
