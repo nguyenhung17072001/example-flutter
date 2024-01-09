@@ -5,7 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'di/injection_container.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'my_app.dart';
-import 'package:local_auth/local_auth.dart';
+
 
 
 

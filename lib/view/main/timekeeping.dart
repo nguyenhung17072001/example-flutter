@@ -2,7 +2,7 @@ import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 
 
@@ -14,21 +14,25 @@ class Timekeeping extends StatefulWidget {
 }
 
 class _TimekeepingState extends State<Timekeeping> {
-
+  final storage = const FlutterSecureStorage();
+  
+  
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     permission();
+    
   }
   void checkIn () async{
-    //Intl.defaultLocale = 'vi';
-    //Intl.defaultLocale = 'es';
-    final String formatter = DateFormat('dd/MM/yyyy').format(DateTime.now());
+   
+    final String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    print(date);
+    final uid = await storage.read(key: 'uid');
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-     await Firebase_Utils.instance.setData("timekeeping", {
+    await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkin", {
       "name": "Hung",
-      "createAt": formatter,
+      //"createAt": date,
       "location": {
         'lat': position.latitude,
         "lon": position.longitude,
@@ -37,14 +41,18 @@ class _TimekeepingState extends State<Timekeeping> {
 
     });
   }
+
   void checkOut () async{
-    
-     await Firebase_Utils.instance.setData("timekeeping", {
+
+    final String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    final uid = await storage.read(key: 'uid');
+    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkout", {
       "name": "Hung",
-      "createAt": DateTime.now().toString(),
+      //"createAt": date,
       "location": {
-        'lat': "21.020688",
-        "lon": "105.847199"
+        'lat': position.latitude,
+        "lon": position.longitude,
       }, 
 
 

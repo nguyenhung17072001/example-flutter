@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:example/bloc/auth/index.dart';
 import 'package:example/common/function/auth_service.dart';
 import 'package:example/routes/index.dart';
@@ -5,6 +7,7 @@ import 'package:example/utils/auth_utils.dart';
 import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme/index.dart';
@@ -20,7 +23,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _constructionUsernameValue = TextEditingController();
   final TextEditingController _constructionUPasswordValue = TextEditingController();
-  
+  final storage = const FlutterSecureStorage();
   void handleLogin() {
     context.read<AuthBloc>().add(LoginEvent(username: _constructionUsernameValue.text, password: _constructionUPasswordValue.text));
   }
@@ -29,7 +32,19 @@ class _LoginState extends State<Login> {
     
     try {
       var result =  await AuthUtils.instance.loginGoogle();
-      print('resultzzzzzzzzzzz: $result');
+      var user = result.user;
+
+      // Extracting relevant data
+      var userData = {
+        'uid': user?.uid,
+        'displayName': user?.displayName,
+       'email': user?.email,
+       // Add other fields as needed
+     };
+
+      //var userJson = jsonEncode(userData);
+      //print('User JSON: $userData');
+      await storage.write(key: 'uid', value: user?.uid.toString());
       NavigatorUtils.instance.pushReplacementNamed(AppRoutes.MY_TAB);
 
     } catch (e) {
