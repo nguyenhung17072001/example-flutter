@@ -10,10 +10,10 @@ class Firebase_Utils {
 
 
 
-  FirebaseDatabase _database = FirebaseDatabase.instance;
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
   Future setData (String urlRef, Map data)async {
     Completer completer = Completer();
-    DatabaseReference ref = FirebaseDatabase.instance.ref(urlRef);
+    DatabaseReference ref = _database.ref(urlRef);
     try {
       await ref.set(data);
       
@@ -23,5 +23,23 @@ class Firebase_Utils {
     }
 
 
+  }
+
+
+  Future readData(String urlRef)async {
+    Completer completer = Completer();
+    
+    try {
+      final ref = FirebaseDatabase.instance.ref();
+      final snapshot = await ref.child(urlRef).get();
+      //print(snapshot.value);
+      completer.complete(snapshot.value);
+          
+     
+      
+    } catch(e) {
+      completer.completeError(e);
+    }
+    return completer.future;
   }
 }

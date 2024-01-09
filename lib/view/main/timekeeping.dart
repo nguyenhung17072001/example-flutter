@@ -15,7 +15,7 @@ class Timekeeping extends StatefulWidget {
 
 class _TimekeepingState extends State<Timekeeping> {
   final storage = const FlutterSecureStorage();
-  
+  //late  timekeepingData;
   
   @override
   void initState() {
@@ -23,16 +23,22 @@ class _TimekeepingState extends State<Timekeeping> {
     super.initState();
     permission();
     
+    
   }
+
+  
+
+
   void checkIn () async{
    
     final String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
+    final String time = DateFormat('HH:mm').format(DateTime.now());
     print(date);
     final uid = await storage.read(key: 'uid');
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkin", {
       "name": "Hung",
-      //"createAt": date,
+      "createAt": time.toString(),
       "location": {
         'lat': position.latitude,
         "lon": position.longitude,
@@ -49,7 +55,7 @@ class _TimekeepingState extends State<Timekeeping> {
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkout", {
       "name": "Hung",
-      //"createAt": date,
+      "createAt": DateTime.now().toString(),
       "location": {
         'lat': position.latitude,
         "lon": position.longitude,
