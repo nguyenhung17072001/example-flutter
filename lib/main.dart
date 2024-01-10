@@ -1,4 +1,5 @@
 
+import 'package:camera/camera.dart';
 import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -16,7 +17,7 @@ void main() async {
     options: FirebaseConfig.android
   );
 
-
+  
   var canAuthenticate = await BiometricUtils.instance.checkBiometrics();
   print('canAuthenticateWithBiometrics========: $canAuthenticate');
   

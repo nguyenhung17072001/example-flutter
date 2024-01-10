@@ -67,6 +67,8 @@ dependencies:
   google_maps_flutter: ^2.5.2
   audioplayers: ^5.2.1
   image_picker: ^1.0.7
+  camera: ^0.10.5+9
+  permission_handler: ^11.1.0
 
 dev_dependencies:
   flutter_test:

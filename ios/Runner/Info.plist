@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Privacy - Microphone Usage Description in the visual editor.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Privacy - Camera Usage Description.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Privacy - Photo Library Usage Description.</string>
 		<key>YourPurposeKey</key>
   		<string>The example App requires temporary access to the device&apos;s precise location.</string>
 		<key>NSLocationWhenInUseUsageDescription</key>

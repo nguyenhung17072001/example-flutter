@@ -5,6 +5,9 @@ import 'package:example/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:camera/camera.dart';
+List<CameraDescription> cameras = [];
+
 
 class Log extends StatefulWidget {
   const Log({Key? key}) : super(key: key);
@@ -16,11 +19,14 @@ class Log extends StatefulWidget {
 class _LogState extends State<Log> {
   final storage = const FlutterSecureStorage();
   Map<String, dynamic>? _timekeepingData;
-  
+  XFile? imageFile;
+
+
   @override
   void initState() {
     super.initState();
     fetchData();
+    
   }
 
   void fetchData() async {
@@ -36,6 +42,16 @@ class _LogState extends State<Log> {
       }
     }
   }
+
+  Future<void> _getCamera() async {
+    cameras = await availableCameras();
+   
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CameraScreen(cameras: cameras)),
+    );
+  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -60,9 +76,7 @@ class _LogState extends State<Log> {
             ),
             if (_timekeepingData != null && _timekeepingData!.isNotEmpty)
               Log_Button(
-                onPressed: () {
-                  
-                },
+                onPressed: _getCamera,
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -85,7 +99,23 @@ class _LogState extends State<Log> {
               child: Text('Quản lý file:'),
             ),
 
-            
+            MediaButton(
+              onPressed: () {}, 
+              child: Container(
+                child: Column(
+                  children: [
+                    const Text('Chọn ảnh'),
+                    TextButton.icon(
+                      onPressed: _getCamera, 
+                      icon: const Icon(Icons.camera_alt), 
+                      label: Container()
+                    )
+
+
+                  ]
+                ),
+              )
+            )
 
           ],
           
