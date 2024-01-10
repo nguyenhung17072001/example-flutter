@@ -3,6 +3,8 @@
 <plist version="1.0">
 	<dict>
 		<key>NSMicrophoneUsageDescription</key>
+		<string>... explain why the app uses the microphone here ...</string>
+		<key>NSMicrophoneUsageDescription</key>
 		<string>Privacy - Microphone Usage Description in the visual editor.</string>
 		<key>NSCameraUsageDescription</key>
 		<string>Privacy - Camera Usage Description.</string>
@@ -55,6 +57,8 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
+		<key>NSAllowsArbitraryLoads</key>
+    	<true/>
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
