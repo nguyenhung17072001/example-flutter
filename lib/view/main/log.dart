@@ -29,9 +29,11 @@ class _LogState extends State<Log> {
     final data = await Firebase_Utils.instance.readData("timekeeping/$uid/$date");
 
     if (data != null && data is Map) {
-      setState(() {
-        _timekeepingData = Map<String, dynamic>.from(data);
-      });
+      if(mounted) {
+        setState(() {
+          _timekeepingData = Map<String, dynamic>.from(data);
+        });
+      }
     }
   }
 
@@ -77,7 +79,17 @@ class _LogState extends State<Log> {
               )
             else
               Text(''),
+
+            Container(
+              margin: EdgeInsetsDirectional.symmetric(horizontal: 20, vertical: 10),
+              child: Text('Quản lý file:'),
+            ),
+
+            
+
           ],
+          
+          
         ),
       ),
     );
