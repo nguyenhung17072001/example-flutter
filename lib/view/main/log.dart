@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:example/utils/index.dart';
 import 'package:example/widgets/index.dart';
@@ -46,10 +47,16 @@ class _LogState extends State<Log> {
   Future<void> _getCamera() async {
     cameras = await availableCameras();
    
-    Navigator.push(
+    final XFile? result = await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => CameraScreen(cameras: cameras)),
     );
+    if (result != null) {
+    setState(() {
+      imageFile = result;
+    });
+    // Do something with the returned image (imageFile)
+  }
   }
   
 
@@ -105,10 +112,24 @@ class _LogState extends State<Log> {
                 child: Column(
                   children: [
                     const Text('Chọn ảnh'),
-                    TextButton.icon(
-                      onPressed: _getCamera, 
-                      icon: const Icon(Icons.camera_alt), 
-                      label: Container()
+                    Row(
+                      children: [
+                        TextButton.icon(
+                          onPressed: _getCamera, 
+                          icon: const Icon(Icons.camera_alt), 
+                          label: Container()
+                        ),
+                        Container(
+                          child: imageFile != null
+      ? Image.file(
+          File(imageFile!.path),
+          width: 100, // Đặt kích thước ảnh tùy ý
+          height: 100,
+          fit: BoxFit.cover, // Có thể thay đổi cách ảnh được hiển thị
+        )
+      : SizedBox(), // Nếu không có ảnh, hiển thị một SizedBox
+                        )
+                      ],
                     )
 
 
