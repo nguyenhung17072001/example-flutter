@@ -66,5 +66,19 @@ class FirebaseUtils {
     }
     return completer.future;
   }
+
+
+  Future readStorage(String path)async {
+    Completer completer = Completer();
+    try{
+      final listResult = await  _storageRef.child(path).listAll();
+      completer.complete(listResult);
+    } catch(e) {
+      completer.completeError(e);
+    }
+
+    return completer.future;
+    
+  }
   
 }
