@@ -31,7 +31,7 @@ class _LogState extends State<Log> {
   late String _audioPath;
   final record = AudioRecorder();
   bool _isLongPress = false;
-
+  
   @override
   void initState() {
     super.initState();
@@ -80,10 +80,14 @@ class _LogState extends State<Log> {
     try {
       if (await record.hasPermission()) {
         // Start recording to file
-        await record.start(const RecordConfig(), path: 'aFullPath/myFile.m4a');
+        final cacheDir = await path_provider.getTemporaryDirectory();
+        const String audioFileName = 'record.m4a';
+        _audioPath = path.join(cacheDir.path, audioFileName);
+        await record.start(const RecordConfig(), path: _audioPath);
         
         setState(() {
           _isRecording = true;
+          //_audioPlayer.setFilePath(_audioPath);
         });
       }
     } catch (e) {
@@ -98,13 +102,21 @@ class _LogState extends State<Log> {
       print('xxxx: $path');
       setState(() {
         _isRecording = false;
+        _audioPlayer.setFilePath(path.toString());
       });
     } catch (e) {
       print("lỗi khi kết thúc ghi âm: $e");
     }
     
   }
-  
+  void _playRecordedAudio() async {
+  try {
+    await _audioPlayer.play();
+    
+  } catch (e) {
+    print("Error playing recorded audio: $e");
+  }
+}
 
 
   
@@ -212,7 +224,13 @@ class _LogState extends State<Log> {
                   ),
                 ),
               ),
+            ),
+
+            TextButton(
+              onPressed: _playRecordedAudio,
+              child: Text('Play Recorded Audio'),
             )
+
 
           ],
           

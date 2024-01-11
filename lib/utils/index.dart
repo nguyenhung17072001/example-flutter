@@ -3,5 +3,5 @@ export 'navigate_utils.dart';
 export 'firebase.dart';
 export 'biometric_utils.dart';
 export 'firebase_utils.dart';
-
+export 'media_utils.dart';
 
