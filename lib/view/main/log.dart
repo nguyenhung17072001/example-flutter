@@ -48,7 +48,7 @@ class _LogState extends State<Log> {
   void fetchData() async {
     final String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
     final uid = await storage.read(key: 'uid');
-    final data = await Firebase_Utils.instance.readData("timekeeping/$uid/$date");
+    final data = await FirebaseUtils.instance.readData("timekeeping/$uid/$date");
 
     if (data != null && data is Map) {
       if(mounted) {
@@ -86,7 +86,6 @@ class _LogState extends State<Log> {
         
         setState(() {
           _isRecording = true;
-          //_audioPlayer.setFilePath(_audioPath);
         });
       }
     } catch (e) {
@@ -109,13 +108,33 @@ class _LogState extends State<Log> {
     
   }
   void _playRecordedAudio() async {
-  try {
-    await _audioPlayer.play();
-    
-  } catch (e) {
-    print("Error playing recorded audio: $e");
+    try {
+      await _audioPlayer.play();
+      
+    } catch (e) {
+      print("Error playing recorded audio: $e");
+    }
   }
-}
+
+
+  void _uploadImage()async {
+    try{
+      String name = DateTime.timestamp().toUtc().toString();
+      File file = File(imageFile!.path);
+      await FirebaseUtils.instance.uploadFileStorage("test/images/$name.jpg", file);
+    }catch(e){
+      print('sss: $e');
+    }
+  }
+  void _uploadRecord()async {
+    try{
+      String name = DateTime.timestamp().toUtc().toString();
+      File file = File(_audioPath);
+      await FirebaseUtils.instance.uploadFileStorage("test/records/$name.m4a", file);
+    }catch(e){
+      print(e);
+    }
+  }
 
 
   
@@ -162,11 +181,11 @@ class _LogState extends State<Log> {
 
             Container(
               margin: EdgeInsetsDirectional.symmetric(horizontal: 20, vertical: 10),
-              child: Text('Quản lý file:'),
+              child: Text('Media:'),
             ),
 
             MediaButton(
-              onPressed: () {}, 
+              onPressed: _uploadImage, 
               child: Container(
                 child: Column(
                   children: [
@@ -236,7 +255,7 @@ class _LogState extends State<Log> {
             
             if (_audioPath != null && _audioPath!.isNotEmpty)
               MediaButton(
-                onPressed: () {},
+                onPressed: _uploadRecord,
                 child: Container(
                   child: Text('record.mp3'),
                 ),

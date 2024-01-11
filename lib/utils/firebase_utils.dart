@@ -1,19 +1,22 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
-class Firebase_Utils {
-  static final Firebase_Utils instance = Firebase_Utils._getInstance();
-  Firebase_Utils._getInstance();
+class FirebaseUtils {
+  static final FirebaseUtils instance = FirebaseUtils._getInstance();
+  FirebaseUtils._getInstance();
   final _firebaseApp = Firebase.app();
 
 
 
+  //realtime database
   final FirebaseDatabase _database = FirebaseDatabase.instance;
-  Future setData (String urlRef, Map data)async {
+  Future<void> setData (String path, Map data)async {
     Completer completer = Completer();
-    DatabaseReference ref = _database.ref(urlRef);
+    DatabaseReference ref = _database.ref(path);
     try {
       await ref.set(data);
       
@@ -26,12 +29,12 @@ class Firebase_Utils {
   }
 
 
-  Future readData(String urlRef)async {
+  Future readData(String path)async {
     Completer completer = Completer();
     
     try {
       final ref = FirebaseDatabase.instance.ref();
-      final snapshot = await ref.child(urlRef).get();
+      final snapshot = await ref.child(path).get();
       //print(snapshot.value);
       completer.complete(snapshot.value);
           
@@ -42,4 +45,22 @@ class Firebase_Utils {
     }
     return completer.future;
   }
+
+
+  //FirebaseStorage
+  final _storageRef = FirebaseStorage.instance.ref();
+
+
+  Future<void> uploadFileStorage(String path, File file)async {
+    Completer completer = Completer();
+    try{
+      
+      final mountainsRef = _storageRef.child(path);
+      await mountainsRef.putFile(file);
+    } on FirebaseException catch (e) {
+      completer.completeError(e);
+    }
+    return completer.future;
+  }
+  
 }

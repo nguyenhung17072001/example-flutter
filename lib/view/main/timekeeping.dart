@@ -36,7 +36,7 @@ class _TimekeepingState extends State<Timekeeping> {
     print(date);
     final uid = await storage.read(key: 'uid');
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkin", {
+    await FirebaseUtils.instance.setData("timekeeping/$uid/$date/checkin", {
       "name": "Hung",
       "createAt": time.toString(),
       "location": {
@@ -53,7 +53,7 @@ class _TimekeepingState extends State<Timekeeping> {
     final String date = DateFormat('dd-MM-yyyy').format(DateTime.now());
     final uid = await storage.read(key: 'uid');
     Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    await Firebase_Utils.instance.setData("timekeeping/$uid/$date/checkout", {
+    await FirebaseUtils.instance.setData("timekeeping/$uid/$date/checkout", {
       "name": "Hung",
       "createAt": DateTime.now().toString(),
       "location": {
