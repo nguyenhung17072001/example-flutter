@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:example/utils/index.dart';
 import 'package:example/widgets/index.dart';
@@ -118,23 +119,38 @@ class _LogState extends State<Log> {
 
 
   void _uploadImage()async {
+    Fluttertoast.showToast(
+      msg: "Đã lưu thành công",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+    );
     try{
       String name = DateTime.timestamp().toUtc().toString();
       File file = File(imageFile!.path);
       await FirebaseUtils.instance.uploadFileStorage("test/images/$name.jpg", file);
+      
     }catch(e){
       print('sss: $e');
     }
   }
   void _uploadRecord()async {
+    Fluttertoast.showToast(
+      msg: "Đã lưu thành công",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 3,
+    );
     try{
       String name = DateTime.timestamp().toUtc().toString();
       File file = File(_audioPath);
       await FirebaseUtils.instance.uploadFileStorage("test/records/$name.m4a", file);
+      
     }catch(e){
       print(e);
     }
   }
+  
 
 
   
@@ -265,10 +281,13 @@ class _LogState extends State<Log> {
             TextButton(
               onPressed: _playRecordedAudio,
               child: Text('Play Recorded Audio'),
-            )
+            ),
+
+            
 
 
           ],
+          
           
           
         ),

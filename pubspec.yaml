@@ -74,6 +74,7 @@ dependencies:
   path: ^1.8.3
   record: ^5.0.4
   flutter_sound: ^9.2.13
+  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:
