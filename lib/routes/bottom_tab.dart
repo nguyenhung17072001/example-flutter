@@ -20,7 +20,8 @@ class _BottomTabPageState extends State<BottomTab> {
     const Home(),
     const Timekeeping(),
     const Log(),
-    Home(),
+    const MediaManagement(),
+  
     
     
   ];

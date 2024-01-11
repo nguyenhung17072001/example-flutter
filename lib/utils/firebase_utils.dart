@@ -51,12 +51,16 @@ class FirebaseUtils {
   final _storageRef = FirebaseStorage.instance.ref();
 
 
-  Future<void> uploadFileStorage(String path, File file)async {
+  Future<void> uploadFileStorage(String path, File file, String contentType)async {
     Completer completer = Completer();
     try{
-      
+      final SettableMetadata metadata = SettableMetadata(
+        cacheControl: "public,max-age=300",
+        contentType: contentType,
+      );
       final mountainsRef = _storageRef.child(path);
       await mountainsRef.putFile(file);
+      await mountainsRef.updateMetadata(metadata);
     } on FirebaseException catch (e) {
       completer.completeError(e);
     }

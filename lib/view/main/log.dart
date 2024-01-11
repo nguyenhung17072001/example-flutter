@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:example/utils/index.dart';
@@ -128,7 +129,8 @@ class _LogState extends State<Log> {
     try{
       String name = DateTime.timestamp().toUtc().toString();
       File file = File(imageFile!.path);
-      await FirebaseUtils.instance.uploadFileStorage("test/images/$name.jpg", file);
+      String contentType = "image/jpeg";
+      await FirebaseUtils.instance.uploadFileStorage("test/images/$name.jpg", file, contentType);
       
     }catch(e){
       print('sss: $e');
@@ -144,7 +146,9 @@ class _LogState extends State<Log> {
     try{
       String name = DateTime.timestamp().toUtc().toString();
       File file = File(_audioPath);
-      await FirebaseUtils.instance.uploadFileStorage("test/records/$name.m4a", file);
+      
+      String contentType = "audio/m4a";
+      await FirebaseUtils.instance.uploadFileStorage("test/records/$name.m4a", file, contentType);
       
     }catch(e){
       print(e);
