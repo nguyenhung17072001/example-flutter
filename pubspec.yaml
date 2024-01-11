@@ -72,6 +72,7 @@ dependencies:
   just_audio: ^0.9.36
   path_provider: ^2.1.2
   path: ^1.8.3
+  record: ^5.0.4
 
 dev_dependencies:
   flutter_test:

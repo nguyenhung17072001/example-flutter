@@ -10,7 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:camera/camera.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
-
+import 'package:record/record.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -28,6 +28,9 @@ class _LogState extends State<Log> {
   XFile? imageFile;
   late AudioPlayer _audioPlayer = AudioPlayer();
   bool _isRecording = false;
+  late String _audioPath;
+  final record = AudioRecorder();
+  bool _isLongPress = false;
 
   @override
   void initState() {
@@ -40,6 +43,7 @@ class _LogState extends State<Log> {
     // TODO: implement dispose
     super.dispose();
     _audioPlayer.dispose();
+    record.dispose();
   }
 
   void fetchData() async {
@@ -71,36 +75,36 @@ class _LogState extends State<Log> {
     
    }
   }
-  Future<String> _getAudioRecordingPath() async {
-    final directory = await path_provider.getApplicationDocumentsDirectory();
-    return path.join(directory.path, 'audio_recording.mp3');
-  }
-  Future<void> _startRecording() async {
+
+  void _startRecord()async {
     try {
-      String filePath = await _getAudioRecordingPath();
-    await _audioPlayer.setFilePath(filePath);
-    await _audioPlayer.setSpeed(1.0);
-    await _audioPlayer.play();
-    setState(() {
-      _isRecording = true;
-      print('Đang ghi âm...');
-    });
+      if (await record.hasPermission()) {
+        // Start recording to file
+        await record.start(const RecordConfig(), path: 'aFullPath/myFile.m4a');
+        
+        setState(() {
+          _isRecording = true;
+        });
+      }
     } catch (e) {
-      print('Lỗi khi bắt đầu ghi âm: $e');
+      print("lỗi khi bắt đầu ghi âm: $e");
     }
   }
 
-  Future<void> _stopRecording() async {
-    try {
-      await _audioPlayer.stop();
+  void _stopReord()async {
+    try{
+      final path = await record.stop();
+
+      print('xxxx: $path');
       setState(() {
         _isRecording = false;
-        print('Kết thúc ghi âm');
       });
     } catch (e) {
-      print('Lỗi khi kết thúc ghi âm: $e');
+      print("lỗi khi kết thúc ghi âm: $e");
     }
+    
   }
+  
 
 
   
@@ -127,7 +131,7 @@ class _LogState extends State<Log> {
             ),
             if (_timekeepingData != null && _timekeepingData!.isNotEmpty)
               Log_Button(
-                onPressed: _getCamera,
+                onPressed: () {},
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -184,11 +188,17 @@ class _LogState extends State<Log> {
 
             Center(
               child: GestureDetector(
-                onLongPressStart: (_) {
-                  _startRecording();
+                onLongPress: () {
+                  _startRecord();
+                  setState(() {
+                    _isRecording = true;
+                  });
                 },
-                onLongPressEnd: (_) {
-                  _stopRecording();
+                onLongPressUp: () {
+                  _stopReord();
+                  setState(() {
+                    _isRecording = false;
+                  });
                 },
                 child: Container(
                   padding: EdgeInsets.all(20.0),
@@ -202,7 +212,6 @@ class _LogState extends State<Log> {
                   ),
                 ),
               ),
-        
             )
 
           ],
