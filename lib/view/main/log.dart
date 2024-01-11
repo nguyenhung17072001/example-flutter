@@ -28,9 +28,8 @@ class _LogState extends State<Log> {
   XFile? imageFile;
   late AudioPlayer _audioPlayer = AudioPlayer();
   bool _isRecording = false;
-  late String _audioPath;
-  final record = AudioRecorder();
-  bool _isLongPress = false;
+  late String _audioPath ='';
+  final AudioRecorder record = AudioRecorder();
   
   @override
   void initState() {
@@ -199,33 +198,45 @@ class _LogState extends State<Log> {
             ),
 
             Center(
-              child: GestureDetector(
-                onLongPress: () {
-                  _startRecord();
-                  setState(() {
-                    _isRecording = true;
-                  });
-                },
-                onLongPressUp: () {
-                  _stopReord();
-                  setState(() {
-                    _isRecording = false;
-                  });
-                },
-                child: Container(
-                  padding: EdgeInsets.all(20.0),
-                  decoration: BoxDecoration(
-                    color: _isRecording ? Colors.red : Colors.blue,
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: Text(
-                    _isRecording ? 'Đang ghi âm...' : 'Ấn giữ để ghi âm',
-                    style: TextStyle(color: Colors.white),
+              child: Container(
+                margin: EdgeInsets.all(10),
+                child: GestureDetector(
+                  onLongPress: () {
+                    _startRecord();
+                    setState(() {
+                      _isRecording = true;
+                    });
+                  },
+                  onLongPressUp: () {
+                    _stopReord();
+                    setState(() {
+                      _isRecording = false;
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      color: _isRecording ? Colors.red : Colors.blue,
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Icon(
+                      _isRecording ? Icons.stop : Icons.mic,
+                      color: Colors.white,
+                      size: 50.0, // Adjust the size as needed
+                    ),
                   ),
                 ),
               ),
             ),
-
+            if (_audioPath != null && _audioPath!.isNotEmpty)
+              MediaButton(
+                onPressed: () {},
+                child: Container(
+                  child: Text('record.mp3'),
+                ),
+              )
+            else
+              Text(''),
             TextButton(
               onPressed: _playRecordedAudio,
               child: Text('Play Recorded Audio'),
