@@ -228,6 +228,12 @@ class _LogState extends State<Log> {
                 ),
               ),
             ),
+            if(_isRecording)
+            Center(
+              child: Text('Đang ghi âm'),
+            ) else 
+            SizedBox(),
+            
             if (_audioPath != null && _audioPath!.isNotEmpty)
               MediaButton(
                 onPressed: () {},
