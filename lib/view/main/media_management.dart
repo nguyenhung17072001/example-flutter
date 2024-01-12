@@ -24,6 +24,13 @@ class _MediaManagementState extends State<MediaManagement> {
     _fetchRecords();
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _audioPlayer.dispose();
+  }
+
   void _fetchImages() async {
     try {
       final ListResult result =
@@ -127,15 +134,19 @@ class _MediaManagementState extends State<MediaManagement> {
               scrollDirection: Axis.vertical,
               itemCount: records.length,
               itemBuilder: (context, index) {
+              late bool isPlay = false;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: TextButton.icon(
                     onPressed: (){
+                      setState(() {
+                        isPlay = true;
+                      });
                       _playRecordedAudio('https://firebasestorage.googleapis.com/v0/b/flutter-demo-991ec.appspot.com/o/${records[index].replaceAll("/", "%2F")}?alt=media');
                     }, 
-                    icon: Icon(Icons.play_arrow),
+                    icon: Icon(isPlay==true?Icons.pause_circle: Icons.play_arrow),
                     label: Text(''),
                     
                   )

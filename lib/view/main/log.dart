@@ -109,14 +109,7 @@ class _LogState extends State<Log> {
     }
     
   }
-  void _playRecordedAudio() async {
-    try {
-      await _audioPlayer.play();
-      
-    } catch (e) {
-      print("Error playing recorded audio: $e");
-    }
-  }
+
 
 
   void _uploadImage()async {
@@ -282,10 +275,7 @@ class _LogState extends State<Log> {
               )
             else
               Text(''),
-            TextButton(
-              onPressed: _playRecordedAudio,
-              child: Text('Play Recorded Audio'),
-            ),
+            
 
             
 
