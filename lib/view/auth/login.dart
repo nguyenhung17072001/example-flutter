@@ -38,9 +38,9 @@ class _LoginState extends State<Login> {
       var userData = {
         'uid': user?.uid,
         'displayName': user?.displayName,
-       'email': user?.email,
-       // Add other fields as needed
-     };
+        'email': user?.email,
+        // Add other fields as needed
+      };
 
       //var userJson = jsonEncode(userData);
       //print('User JSON: $userData');

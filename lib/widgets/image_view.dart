@@ -18,7 +18,7 @@ class ImageView extends StatelessWidget {
         child: Container(
           // Sử dụng PhotoView để hiển thị hình ảnh
           child: PhotoView(
-            imageProvider: FileImage(File(imagePath)),
+            imageProvider: NetworkImage(imagePath),
             minScale: PhotoViewComputedScale.contained,
             maxScale: PhotoViewComputedScale.covered * 2,
             initialScale: PhotoViewComputedScale.contained,
