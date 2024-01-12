@@ -103,6 +103,7 @@ flutter:
   assets:
     - assets/logo.png
     - assets/login.png
+    - assets/location.png
     
 
     #- images/a_dot_ham.jpeg

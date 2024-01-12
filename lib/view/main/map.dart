@@ -52,13 +52,13 @@ class _MapScreen extends State<MapScreen> {
         markerId: const MarkerId("kGooglePlexMarker"),
         position: LatLng(_latitude, _longitude),
         icon: await MarkerIcon.pictureAsset(
-          assetPath: "assets/login.png", 
+          assetPath: "assets/location.png", 
           width: 100, 
           height: 100
         ), 
         
         infoWindow: const InfoWindow(
-          title: "Nhân viên",
+          title: "Nhân viên Nguyễn Văn A",
           snippet: "Vị trí check in",
         ),
       ),

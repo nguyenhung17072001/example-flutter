@@ -90,17 +90,20 @@ class _TimekeepingState extends State<Timekeeping> {
         child: Column(
           children: [
             Container(
-              child: TextButton(
+              child: TextButton.icon(
                 onPressed: checkIn,
-                child: const Text('Check In'),
+                label: const Text('Check In'), 
+                icon: Icon(Icons.touch_app),
               ),
             ),
             Container(
-              child: TextButton(
+              child: TextButton.icon(
                 onPressed: checkOut,
-                child: const Text('Check Out'),
+                label: const Text('Check out'), 
+                icon: Icon(Icons.touch_app),
               ),
             ),
+            
             
           ],
         )
