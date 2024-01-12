@@ -2,6 +2,7 @@ import 'package:example/utils/index.dart';
 import 'package:example/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:just_audio/just_audio.dart';
 
 class MediaManagement extends StatefulWidget {
   const MediaManagement({super.key});
@@ -15,7 +16,7 @@ class MediaManagement extends StatefulWidget {
 class _MediaManagementState extends State<MediaManagement> {
   List<String> images = [];
   List<String> records = [];
-
+  late AudioPlayer _audioPlayer = AudioPlayer();
   @override
   void initState() {
     super.initState();
@@ -46,6 +47,16 @@ class _MediaManagementState extends State<MediaManagement> {
       });
     } catch (e) {
       print(e);
+    }
+  }
+
+  void _playRecordedAudio(String path) async {
+    try {
+      await _audioPlayer.setUrl(path);
+      await _audioPlayer.play();
+      
+    } catch (e) {
+      print("Error playing recorded audio: $e");
     }
   }
 
@@ -97,6 +108,39 @@ class _MediaManagementState extends State<MediaManagement> {
                     ),
                   ),
                 );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Records đã lưu trên server',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Container(
+            height: 200, // Set a fixed height for the horizontal list
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: records.length,
+              itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: TextButton.icon(
+                    onPressed: (){
+                      _playRecordedAudio('https://firebasestorage.googleapis.com/v0/b/flutter-demo-991ec.appspot.com/o/${records[index].replaceAll("/", "%2F")}?alt=media');
+                    }, 
+                    icon: Icon(Icons.play_arrow),
+                    label: Text(''),
+                    
+                  )
+                ),
+              );
               },
             ),
           ),

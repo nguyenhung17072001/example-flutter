@@ -28,7 +28,7 @@ class _LogState extends State<Log> {
   final storage = const FlutterSecureStorage();
   Map<String, dynamic>? _timekeepingData;
   XFile? imageFile;
-  late AudioPlayer _audioPlayer = AudioPlayer();
+  late final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isRecording = false;
   late String _audioPath ='';
   final AudioRecorder record = AudioRecorder();
