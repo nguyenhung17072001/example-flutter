@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:example/view/main/index.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_audio/just_audio.dart';
@@ -174,7 +175,19 @@ class _LogState extends State<Log> {
             ),
             if (_timekeepingData != null && _timekeepingData!.isNotEmpty)
               Log_Button(
-                onPressed: () {},
+                onPressed: () {
+                  print(_timekeepingData);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MapScreen(
+                        latitude: _timekeepingData?['checkin']?['location']?['lat'], 
+                        longitude: _timekeepingData?['checkin']?['location']?['lon'],
+                        
+                      )
+                    ),
+                  );
+                },
                 child: Container(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
