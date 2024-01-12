@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:custom_marker/marker_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -44,6 +45,33 @@ class _MapScreen extends State<MapScreen> {
     
     super.initState();
   }
+
+  void _addHostMarker() async {
+    _markers.add(
+      Marker(
+        markerId: const MarkerId("kGooglePlexMarker"),
+        position: LatLng(_latitude, _longitude),
+        icon: await MarkerIcon.pictureAsset(
+          assetPath: "assets/login.png", 
+          width: 100, 
+          height: 100
+        ), 
+        
+        infoWindow: const InfoWindow(
+          title: "Nhân viên",
+          snippet: "Vị trí check in",
+        ),
+      ),
+    );
+
+    setState(() {});
+  }
+
+  
+  
+
+
+
   @override
   void dispose() {
   
@@ -67,9 +95,12 @@ class _MapScreen extends State<MapScreen> {
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) async {
               _controller.complete(controller);
-              
+              _addHostMarker();
              
             },
+            markers: _markers,
+
+
           ),
         ),
         
