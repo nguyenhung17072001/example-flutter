@@ -15,7 +15,8 @@ class TimekeepingCamera extends StatefulWidget {
 class _TimekeepingCameraState extends State<TimekeepingCamera> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
-  
+  XFile? image;
+  bool isCamera = true;
 
   @override
   void initState() {
@@ -31,16 +32,24 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
     try {
       // Ensure the controller is initialized before taking a picture
       await _initializeControllerFuture;
-      XFile image = await _controller.takePicture();
-      
+      image = await _controller.takePicture();
+      setState(() {
+        isCamera = false;
+      });
       //Navigator.pop(context, image);
-      print('result: ${image.path}');
+      print('result: ${image?.path}');
       
 
     } catch (e) {
       print('22: $e');
     }
   }
+  void _retakePicture() {
+  setState(() {
+    isCamera = true;
+    image = null; 
+  });
+}
   
 
   @override
@@ -51,7 +60,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
 
   @override
   Widget build(BuildContext context) {
-    
+    if(isCamera) {
       return FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -94,8 +103,8 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                             shape: BoxShape.circle,
                             color: Colors.transparent,
                             border: Border.all(
-                              color: Colors.white, // Màu của viền
-                              width: 4.0, // Độ dày của viền
+                              color: Colors.white, 
+                              width: 4.0, 
                             ),
                           ),
                           child: Center(
@@ -147,7 +156,52 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
         },
       
       );
-    
+    } else {
+      return Stack(
+        //mainAxisSize: MainAxisSize.max,
+        children: [
+          Positioned.fill(
+            child: Image.file(
+                File(image!.path),
+                width: MediaQuery.of(context).size.width, 
+                height: MediaQuery.of(context).size.height,
+                fit: BoxFit.fill,
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TextButton(
+                      
+                      onPressed: _retakePicture, 
+                      child: Text("Chụp lại")
+                    ),
+                    TextButton(
+                      onPressed: _retakePicture, 
+                      child: Text("Tiếp tục")
+                    ),
+                
+                  ],
+                ),
+              ),
+            ),
+          )
+            
+          
+        ], 
+      
+    );
+    }
   }
 
 }
