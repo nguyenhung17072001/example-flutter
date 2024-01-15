@@ -1,25 +1,29 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-
-class CameraScreen extends StatefulWidget {
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:math' as math;
+class TimekeepingCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
 
-  CameraScreen({Key? key, required this.cameras}) : super(key: key);
+  const TimekeepingCamera({super.key, required this.cameras});
 
   @override
-  _CameraScreenState createState() => _CameraScreenState();
+  _TimekeepingCameraState createState() => _TimekeepingCameraState();
 }
 
-class _CameraScreenState extends State<CameraScreen> {
+class _TimekeepingCameraState extends State<TimekeepingCamera> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(widget.cameras[0], ResolutionPreset.medium);
+    _controller = CameraController(widget.cameras[1], ResolutionPreset.veryHigh);
     _initializeControllerFuture = _controller.initialize();
+    
   }
+
+ 
 
   void _takePicture() async {
     try {
@@ -47,17 +51,34 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Camera Example')),
+      
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            var tmp = MediaQuery.of(context).size;
+            var screenH = math.max(tmp.height, tmp.width);
+            var screenW = math.min(tmp.height, tmp.width);
+            tmp = _controller.value.previewSize!;
+            var previewH = math.max(tmp.height, tmp.width);
+            var previewW = math.min(tmp.height, tmp.width);
+            var screenRatio = screenH / screenW;
+            var previewRatio = previewH / previewW;
             return Stack(
               children: [
-                CameraPreview(_controller),
+                
+                  
+                OverflowBox(
+                  maxHeight:
+                    screenRatio > previewRatio ? screenH : screenW / previewW * previewH,
+                  maxWidth:
+                    screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
+                  child: CameraPreview(_controller)
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: FloatingActionButton(
+                    backgroundColor: Colors.grey.withOpacity(0.3), // Set the transparency here
                     child: Icon(Icons.camera),
                     onPressed: _takePicture,
                   ),
@@ -71,6 +92,7 @@ class _CameraScreenState extends State<CameraScreen> {
       ),
     );
   }
+
 }
 
 

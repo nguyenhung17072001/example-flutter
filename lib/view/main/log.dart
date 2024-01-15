@@ -68,7 +68,7 @@ class _LogState extends State<Log> {
     // ignore: use_build_context_synchronously
     final XFile? result = await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CameraScreen(cameras: cameras)),
+      MaterialPageRoute(builder: (context) => TimekeepingCamera(cameras: cameras)),
     );
     if (result != null) {
       setState(() {

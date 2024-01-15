@@ -96,6 +96,24 @@ class AuthUtils {
   }
 
 
+  //FirebaseAuth
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  Future loginFirebase(String email, String password)async {
+    Completer completer = Completer();
+    try {
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+      await FirebaseAuth.instance.currentUser!.reauthenticateWithCredential(credential);
+      completer.complete(credential);
+    } catch(e) {
+      completer.completeError(e);
+    }
+
+    return completer.future;
+
+
+  }
+
+
   //Biometric
 
   
