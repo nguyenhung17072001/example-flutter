@@ -1,7 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:ui';
 import 'dart:math' as math;
+
+import 'package:flutter/services.dart';
 class TimekeepingCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
 
@@ -29,15 +31,13 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
     try {
       // Ensure the controller is initialized before taking a picture
       await _initializeControllerFuture;
-
       final image = await _controller.takePicture();
       Navigator.pop(context, image);
       print('result: ${image.path}');
-      // Do something with the captured image, for example, save it to gallery
-      // Replace this with your desired code to handle the captured image
+      
 
     } catch (e) {
-      print('22: $e'); // Handle the exception appropriately
+      print('22: $e');
     }
   }
   
@@ -50,9 +50,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      body: FutureBuilder<void>(
+    return FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -67,29 +65,71 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
             return Stack(
               children: [
                 
-                  
-                OverflowBox(
-                  maxHeight:
-                    screenRatio > previewRatio ? screenH : screenW / previewW * previewH,
-                  maxWidth:
-                    screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
-                  child: CameraPreview(_controller)
+                Positioned.fill(
+                  child: OverflowBox(
+                    maxHeight:
+                      screenRatio > previewRatio ? screenH : screenW / previewW * previewH,
+                    maxWidth:
+                      screenRatio > previewRatio ? screenH / previewH * previewW : screenW,
+                    child: CameraPreview(_controller)
+                  ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FloatingActionButton(
-                    backgroundColor: Colors.grey.withOpacity(0.3), // Set the transparency here
-                    child: Icon(Icons.camera),
-                    onPressed: _takePicture,
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: double.infinity,
+                    height: 160,
+                    color: const Color.fromRGBO(0, 0, 0, 0.4),
+                    child: Center(
+                      child: GestureDetector(
+                        onTap: _takePicture,
+                        child: Container(
+                          width: 83.0,
+                          height: 83.0,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.transparent,
+                            border: Border.all(
+                              color: Colors.white, // Màu của viền
+                              width: 4.0, // Độ dày của viền
+                            ),
+                          ),
+                          child: Center(
+                            child: Container(
+                              width: 63.0,
+                              height: 63.0,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                              
+                            ),
+                          ), 
+                        ),
+                        
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  left: 0,
+                  top: 0,
+                  child: Container(
+                    width: double.infinity,
+                    height: 120,
+                    color: const Color.fromRGBO(0, 0, 0, 0.4),
                   ),
                 ),
               ],
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         },
-      ),
+      
     );
   }
 
