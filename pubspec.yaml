@@ -104,6 +104,7 @@ flutter:
     - assets/logo.png
     - assets/login.png
     - assets/location.png
+    - assets/et_focus.png
     
 
     #- images/a_dot_ham.jpeg

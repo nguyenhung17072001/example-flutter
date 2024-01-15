@@ -1,14 +1,13 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'dart:math' as math;
 
-import 'package:flutter/services.dart';
 class TimekeepingCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
 
   const TimekeepingCamera({super.key, required this.cameras});
-
   @override
   _TimekeepingCameraState createState() => _TimekeepingCameraState();
 }
@@ -16,13 +15,14 @@ class TimekeepingCamera extends StatefulWidget {
 class _TimekeepingCameraState extends State<TimekeepingCamera> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  
 
   @override
   void initState() {
     super.initState();
     _controller = CameraController(widget.cameras[1], ResolutionPreset.veryHigh);
     _initializeControllerFuture = _controller.initialize();
-    
+
   }
 
  
@@ -31,8 +31,9 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
     try {
       // Ensure the controller is initialized before taking a picture
       await _initializeControllerFuture;
-      final image = await _controller.takePicture();
-      Navigator.pop(context, image);
+      XFile image = await _controller.takePicture();
+      
+      //Navigator.pop(context, image);
       print('result: ${image.path}');
       
 
@@ -50,7 +51,8 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
+    
+      return FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
@@ -80,7 +82,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                   bottom: 0,
                   child: Container(
                     width: double.infinity,
-                    height: 160,
+                    height: MediaQuery.of(context).size.height*0.185,
                     color: const Color.fromRGBO(0, 0, 0, 0.4),
                     child: Center(
                       child: GestureDetector(
@@ -119,10 +121,24 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                   top: 0,
                   child: Container(
                     width: double.infinity,
-                    height: 120,
+                    height: MediaQuery.of(context).size.height*0.14,
                     color: const Color.fromRGBO(0, 0, 0, 0.4),
                   ),
                 ),
+                Positioned(
+                  right: 20,
+                  left: 20,
+                  top: MediaQuery.of(context).size.height*0.25,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/et_focus.png',
+                      fit: BoxFit.contain,
+                      height: 280,
+                      width: 280,
+                    ),
+                  ),
+                ),
+
               ],
             );
           } else {
@@ -130,7 +146,8 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
           }
         },
       
-    );
+      );
+    
   }
 
 }
