@@ -4,3 +4,4 @@ export 'log_button.dart';
 export 'media.dart';
 export 'timekeeping_camera.dart';
 export 'image_view.dart';
+export 'partner_camera.dart';

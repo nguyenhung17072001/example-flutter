@@ -4,56 +4,58 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:image/image.dart' as img;
-class TimekeepingCamera extends StatefulWidget {
+class PartnerCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
 
-  const TimekeepingCamera({super.key, required this.cameras});
+  const PartnerCamera({super.key, required this.cameras});
   @override
-  _TimekeepingCameraState createState() => _TimekeepingCameraState();
+  _PartnerCameraState createState() => _PartnerCameraState();
 }
 
-class _TimekeepingCameraState extends State<TimekeepingCamera> {
+class _PartnerCameraState extends State<PartnerCamera> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  List<XFile> images = [];
   XFile? image;
   bool isCamera = true;
 
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(widget.cameras[1], ResolutionPreset.veryHigh);
+    _controller = CameraController(widget.cameras[0], ResolutionPreset.veryHigh);
     _initializeControllerFuture = _controller.initialize();
 
   }
 
- 
-
+  //handle:
   void _takePicture() async {
     try {
       // Ensure the controller is initialized before taking a picture
       await _initializeControllerFuture;
-      XFile unorientedImage = await _controller.takePicture();
-
-      // Read the image
-      img.Image? imageFile = img.decodeImage(File(unorientedImage.path).readAsBytesSync());
-
-      // Flip the image horizontally
-      img.Image flippedImage = img.flipHorizontal(imageFile!);
-
-      // Save the flipped image
-      File flippedFile = File(unorientedImage.path)..writeAsBytesSync(img.encodeJpg(flippedImage));
-      image = XFile(flippedFile.path);
+      image = await _controller.takePicture();
 
       setState(() {
         isCamera = false;
       });
 
-      print('result: ${image?.path}');
+      //print('result: ${image?.path}');
     } catch (e) {
       print('error while taking the picture: $e');
     }
   }
 
+  void _submitImages()async {
+    images.add(image!);
+    Navigator.pop(context, images);
+  }
+
+  void _takePictureAgain()async{
+    images.add(image!);
+    setState(() {
+      isCamera = true;
+      image = null; 
+    });
+  }
 
   void _retakePicture() {
     setState(() {
@@ -63,6 +65,8 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
   }
   
 
+
+  //dispose
   @override
   void dispose() {
     _controller.dispose();
@@ -145,18 +149,16 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                   ),
                 ),
                 Positioned(
-                  right: 20,
-                  left: 20,
-                  top: MediaQuery.of(context).size.height*0.25,
-                  child: Center(
-                    child: Image.asset(
-                      'assets/et_focus.png',
-                      fit: BoxFit.contain,
-                      height: 280,
-                      width: 280,
-                    ),
+                  left: 10,
+                  top: MediaQuery.of(context).size.height*0.07,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(Icons.chevron_left, size: 28, color: Colors.white,),
                   ),
                 ),
+                
 
               ],
             );
@@ -192,17 +194,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(16.0),
-                        minimumSize: Size(
-                          MediaQuery.of(context).size.width *0.45, 
-                          40
-                        ),
-                        backgroundColor: const Color(0xffFDEFDB),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
+                      
                       onPressed: _retakePicture, 
                       child: const Text(
                         "Chụp lại",
@@ -213,25 +205,23 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                       )
                     ),
                     TextButton(
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(16.0),
-                        minimumSize: Size(
-                          MediaQuery.of(context).size.width *0.45, 
-                          40
+                      
+                      onPressed: _takePictureAgain, 
+                      child: const Text(
+                        "Chụp tiếp",
+                        style: TextStyle(
+                          color: Color(0xffFF5E00),
+                          fontSize: 14,
                         ),
-                        backgroundColor: const Color(0xffFF5E00),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context, image);
-                      }, 
+                      )
+                    ),
+                    TextButton(
+                      
+                      onPressed: _submitImages, 
                       child: const Text(
                         "Tiếp tục",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xffFF5E00),
                           fontSize: 14,
                         ),
                       )
