@@ -26,7 +26,6 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
 
   }
 
- 
 
   void _takePicture() async {
     try {
@@ -53,7 +52,6 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
       print('error while taking the picture: $e');
     }
   }
-
 
   void _retakePicture() {
     setState(() {
@@ -85,8 +83,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
             var screenRatio = screenH / screenW;
             var previewRatio = previewH / previewW;
             return Stack(
-              children: [
-                
+              children: [                
                 Positioned.fill(
                   child: OverflowBox(
                     maxHeight:
@@ -125,8 +122,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                               decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.white,
-                              ),
-                              
+                              ),                              
                             ),
                           ), 
                         ),
@@ -157,14 +153,12 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                     ),
                   ),
                 ),
-
               ],
             );
           } else {
             return const Center(child: CircularProgressIndicator());
           }
         },
-      
       );
     } else {
       return Stack(
@@ -222,8 +216,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                         backgroundColor: const Color(0xffFF5E00),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        
+                        ), 
                       ),
                       onPressed: () {
                         Navigator.pop(context, image);
@@ -236,16 +229,12 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                         ),
                       )
                     ),
-                
                   ],
                 ),
               ),
             ),
           )
-            
-          
         ], 
-      
     );
     }
   }
