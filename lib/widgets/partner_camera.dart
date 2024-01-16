@@ -23,8 +23,18 @@ class _PartnerCameraState extends State<PartnerCamera> {
   void initState() {
     super.initState();
     _controller = CameraController(widget.cameras[0], ResolutionPreset.veryHigh);
-    _initializeControllerFuture = _controller.initialize();
+    _initializeControllerFuture = _initializeCameraController();
+    
+    
+  }
 
+  Future<void> _initializeCameraController() async {
+    try {
+      await _controller.initialize();
+      _controller.setFlashMode(FlashMode.off); // Set flash mode to off after initialization
+    } catch (e) {
+      print('Error initializing camera controller: $e');
+    }
   }
 
   //handle:

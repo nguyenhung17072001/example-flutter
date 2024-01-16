@@ -22,8 +22,18 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
   void initState() {
     super.initState();
     _controller = CameraController(widget.cameras[1], ResolutionPreset.veryHigh);
-    _initializeControllerFuture = _controller.initialize();
+    _initializeControllerFuture = _initializeCameraController();
+    
+  }
 
+  
+  Future<void> _initializeCameraController() async {
+    try {
+      await _controller.initialize();
+      _controller.setFlashMode(FlashMode.off); // Set flash mode to off after initialization
+    } catch (e) {
+      print('Error initializing camera controller: $e');
+    }
   }
 
 
@@ -166,10 +176,10 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
         children: [
           Positioned.fill(
             child: Image.file(
-                File(image!.path),
-                width: MediaQuery.of(context).size.width, 
-                height: MediaQuery.of(context).size.height,
-                fit: BoxFit.cover,
+              File(image!.path),
+              width: MediaQuery.of(context).size.width, 
+              height: MediaQuery.of(context).size.height,
+              fit: BoxFit.cover,
             ),
           ),
           Positioned(
@@ -238,7 +248,6 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
     );
     }
   }
-
 }
 
 
