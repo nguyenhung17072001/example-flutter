@@ -1,9 +1,12 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:example/common/index.dart';
 import 'package:example/utils/index.dart';
 import 'package:example/widgets/index.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/modal_sheet/modal_sheet.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -68,8 +71,33 @@ class _HomeState extends State<Home> {
         imageFiles = result;
       });
     
-   }
+    }
   }
+
+  void _showFailModal() async {
+    showModalBottomSheet(
+      showDragHandle: true,
+      useSafeArea: true,
+      isDismissible: true,
+      context: context, 
+      builder: (BuildContext context) {
+        return const TimekeepingFailModal();
+      }
+    );
+  }
+
+  void _showSuccessModal() async {
+    showModalBottomSheet(
+      showDragHandle: true,
+      useSafeArea: true,
+      isDismissible: true,
+      context: context, 
+      builder: (BuildContext context) {
+        return const TimekeepingSuccessModal();
+      }
+    );
+  }
+  
   
 
 
@@ -80,6 +108,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextButton(
               onPressed: testLocalAuth,
@@ -108,6 +137,14 @@ class _HomeState extends State<Home> {
             TextButton(
               onPressed: _getPartnerCamera,
               child: const Text('Camera đối tác theo tuyến'),
+            ),
+            TextButton(
+              onPressed: _showFailModal,
+              child: const Text('modal điểm danh thất bại '),
+            ),
+            TextButton(
+              onPressed: _showSuccessModal,
+              child: const Text('modal điểm danh thành công '),
             ),
 
           ],
