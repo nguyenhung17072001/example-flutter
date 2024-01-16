@@ -76,6 +76,7 @@ dependencies:
   flutter_sound: ^9.2.13
   fluttertoast: ^8.2.4
   custom_marker: ^1.0.0
+  image: ^4.1.4
 
 dev_dependencies:
   flutter_test:

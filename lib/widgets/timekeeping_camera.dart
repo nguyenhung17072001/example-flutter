@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-
+import 'package:image/image.dart' as img;
 class TimekeepingCamera extends StatefulWidget {
   final List<CameraDescription> cameras;
 
@@ -29,27 +29,43 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
  
 
   void _takePicture() async {
-    try {
-      // Ensure the controller is initialized before taking a picture
-      await _initializeControllerFuture;
-      image = await _controller.takePicture();
-      setState(() {
-        isCamera = false;
-      });
-      //Navigator.pop(context, image);
-      print('result: ${image?.path}');
-      
+  try {
+    // Ensure the controller is initialized before taking a picture
+    await _initializeControllerFuture;
+    XFile unorientedImage = await _controller.takePicture();
 
-    } catch (e) {
-      print('22: $e');
-    }
+    // Read the image
+    img.Image? imageFile = img.decodeImage(File(unorientedImage.path).readAsBytesSync());
+
+    // Flip the image horizontally
+    img.Image flippedImage = img.flipHorizontal(imageFile!);
+
+    // Save the flipped image
+    File flippedFile = File(unorientedImage.path)..writeAsBytesSync(img.encodeJpg(flippedImage));
+    image = XFile(flippedFile.path);
+
+    setState(() {
+      isCamera = false;
+    });
+
+    print('result: ${image?.path}');
+  } catch (e) {
+    print('22: $e');
   }
-  void _retakePicture() {
-  setState(() {
-    isCamera = true;
-    image = null; 
-  });
 }
+
+
+
+
+
+
+
+  void _retakePicture() {
+    setState(() {
+      isCamera = true;
+      image = null; 
+    });
+  }
   
 
   @override
@@ -165,7 +181,7 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                 File(image!.path),
                 width: MediaQuery.of(context).size.width, 
                 height: MediaQuery.of(context).size.height,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
             ),
           ),
           Positioned(
@@ -187,7 +203,9 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                       child: Text("Chụp lại")
                     ),
                     TextButton(
-                      onPressed: _retakePicture, 
+                      onPressed: () {
+                        Navigator.pop(context, image);
+                      }, 
                       child: Text("Tiếp tục")
                     ),
                 
