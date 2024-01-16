@@ -29,35 +29,30 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
  
 
   void _takePicture() async {
-  try {
-    // Ensure the controller is initialized before taking a picture
-    await _initializeControllerFuture;
-    XFile unorientedImage = await _controller.takePicture();
+    try {
+      // Ensure the controller is initialized before taking a picture
+      await _initializeControllerFuture;
+      XFile unorientedImage = await _controller.takePicture();
 
-    // Read the image
-    img.Image? imageFile = img.decodeImage(File(unorientedImage.path).readAsBytesSync());
+      // Read the image
+      img.Image? imageFile = img.decodeImage(File(unorientedImage.path).readAsBytesSync());
 
-    // Flip the image horizontally
-    img.Image flippedImage = img.flipHorizontal(imageFile!);
+      // Flip the image horizontally
+      img.Image flippedImage = img.flipHorizontal(imageFile!);
 
-    // Save the flipped image
-    File flippedFile = File(unorientedImage.path)..writeAsBytesSync(img.encodeJpg(flippedImage));
-    image = XFile(flippedFile.path);
+      // Save the flipped image
+      File flippedFile = File(unorientedImage.path)..writeAsBytesSync(img.encodeJpg(flippedImage));
+      image = XFile(flippedFile.path);
 
-    setState(() {
-      isCamera = false;
-    });
+      setState(() {
+        isCamera = false;
+      });
 
-    print('result: ${image?.path}');
-  } catch (e) {
-    print('22: $e');
+      print('result: ${image?.path}');
+    } catch (e) {
+      print('error while taking the picture: $e');
+    }
   }
-}
-
-
-
-
-
 
 
   void _retakePicture() {
@@ -135,7 +130,6 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                             ),
                           ), 
                         ),
-                        
                       ),
                     ),
                   ),
@@ -198,15 +192,49 @@ class _TimekeepingCameraState extends State<TimekeepingCamera> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     TextButton(
-                      
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(16.0),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width *0.45, 
+                          40
+                        ),
+                        backgroundColor: const Color(0xffFDEFDB),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                      ),
                       onPressed: _retakePicture, 
-                      child: Text("Chụp lại")
+                      child: const Text(
+                        "Chụp lại",
+                        style: TextStyle(
+                          color: Color(0xffFF5E00),
+                          fontSize: 14,
+                        ),
+                      )
                     ),
                     TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(16.0),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width *0.45, 
+                          40
+                        ),
+                        backgroundColor: const Color(0xffFF5E00),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        
+                      ),
                       onPressed: () {
                         Navigator.pop(context, image);
                       }, 
-                      child: Text("Tiếp tục")
+                      child: const Text(
+                        "Tiếp tục",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      )
                     ),
                 
                   ],
