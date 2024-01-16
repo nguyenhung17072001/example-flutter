@@ -25,13 +25,13 @@ class _PartnerCameraState extends State<PartnerCamera> {
     _controller = CameraController(widget.cameras[0], ResolutionPreset.veryHigh);
     _initializeControllerFuture = _initializeCameraController();
     
-    
+
   }
 
   Future<void> _initializeCameraController() async {
     try {
       await _controller.initialize();
-      _controller.setFlashMode(FlashMode.off); // Set flash mode to off after initialization
+      _controller.setFlashMode(FlashMode.off);
     } catch (e) {
       print('Error initializing camera controller: $e');
     }
