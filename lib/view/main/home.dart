@@ -6,7 +6,7 @@ import 'package:example/utils/index.dart';
 import 'package:example/widgets/index.dart';
 import 'package:flutter/material.dart';
 
-import '../../common/modal_sheet/modal_sheet.dart';
+import '../../common/index.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -95,10 +95,36 @@ class _HomeState extends State<Home> {
       builder: (BuildContext context) {
         return TimekeepingSuccessModal(
           timekeepingStatus: 'Checkin Thành Công',
-          fullName: "Nguyễn Hưng",
+          name: "Nguyễn Hưng",
           role: "Trình dược viên"
         );
       }
+    );
+  }
+
+
+
+  void _showDialog() async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertCheckin(
+          title: "Checkin Đại Lý"
+        );
+      },
+    );
+  }
+
+
+  void _showDeleteAvatarDialog() async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDeleteAvatar(
+          title: "Xóa ảnh đại diện", 
+          onDelete: () {  },
+        );
+      },
     );
   }
 
@@ -147,6 +173,14 @@ class _HomeState extends State<Home> {
             TextButton(
               onPressed: _showSuccessModal,
               child: const Text('modal điểm danh thành công '),
+            ),
+            TextButton(
+              onPressed: _showDialog,
+              child: const Text('Checkin đại lý'),
+            ),
+            TextButton(
+              onPressed: _showDeleteAvatarDialog,
+              child: const Text('alert xóa ảnh đại diện'),
             ),
 
           ],

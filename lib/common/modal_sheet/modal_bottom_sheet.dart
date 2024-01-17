@@ -63,7 +63,7 @@ class TimekeepingFailModal extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  onPressed: ()=>Navigator.of(context).pop(), 
+                  onPressed: () => Navigator.of(context).pop(), 
                     child: const Text(
                       "Trở về",
                       style: TextStyle(
@@ -108,12 +108,12 @@ class TimekeepingFailModal extends StatelessWidget {
 // ignore: must_be_immutable
 class TimekeepingSuccessModal extends StatelessWidget {
   late String timekeepingStatus;
-  late String fullName;
+  late String name;
   late String role;
   TimekeepingSuccessModal({
     super.key, 
     required this.timekeepingStatus, 
-    required this.fullName,
+    required this.name,
     required this.role,
   });
 
@@ -138,7 +138,7 @@ class TimekeepingSuccessModal extends StatelessWidget {
             ),
           ),
           Text(
-            fullName,
+            name,
             textAlign: TextAlign.center,
             style: const TextStyle(color: Color(0xff262626), fontSize: 16),
           ),

@@ -105,11 +105,14 @@ flutter:
     - assets/logo.png
     - assets/login.png
     - assets/location.png
+    # camera focus
     - assets/et_focus.png
+    # modal icon
     - assets/gonsa_character.png
     - assets/avatar_test.png
+    - assets/alert_icon.png
     
-    #bottom bar icon
+    # bottom bar icon
     - assets/home_bar_icon.png
     - assets/partner_bar_icon.png
     - assets/schedule_bar_icon.png
