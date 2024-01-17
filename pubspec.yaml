@@ -109,6 +109,14 @@ flutter:
     - assets/gonsa_character.png
     - assets/avatar_test.png
     
+    #bottom bar icon
+    - assets/home_bar_icon.png
+    - assets/partner_bar_icon.png
+    - assets/schedule_bar_icon.png
+    - assets/ctkm_bar_icon.png
+    - assets/order_bar_icon.png
+
+    
 
     #- images/a_dot_ham.jpeg
 

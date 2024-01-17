@@ -1,5 +1,5 @@
 import 'package:example/view/main/index.dart';
-import 'package:flutter/cupertino.dart';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class BottomTab extends StatefulWidget {
@@ -29,6 +29,13 @@ class _BottomTabPageState extends State<BottomTab> {
         children: _tabs,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        showUnselectedLabels: true,
+        showSelectedLabels: true,
+        selectedIconTheme: const IconThemeData(color: Color(0xffFF5E00)),
+        selectedItemColor: const Color(0xffFF5E00),
+        selectedLabelStyle: const TextStyle(color: Color(0xffFF5E00)),
+        
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -43,22 +50,22 @@ class _BottomTabPageState extends State<BottomTab> {
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
-            icon: Icon(Icons.touch_app),
+            icon: Icon(Icons.work),
             label: 'Đối tác',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
-            icon: Icon(Icons.filter_1),
+            icon: Icon(Icons.work),
             label: 'Lịch',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.work),
             label: 'CTKM',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.work),
             label: 'Đơn hàng',
           ),
         ],
