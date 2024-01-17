@@ -15,14 +15,9 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
-
-
+class _HomeState extends State<Home> {
   //timekeeping camera 
+  
   XFile? imageFile;
   List<CameraDescription> cameras = [];
 
@@ -159,6 +154,4 @@ class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
       ),
     );
   }
-  
-  
 }
