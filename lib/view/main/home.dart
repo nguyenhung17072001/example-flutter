@@ -93,16 +93,18 @@ class _HomeState extends State<Home> {
       isDismissible: true,
       context: context, 
       builder: (BuildContext context) {
-        return const TimekeepingSuccessModal();
+        return TimekeepingSuccessModal(
+          timekeepingStatus: 'Checkin Thành Công',
+          fullName: "Nguyễn Hưng",
+          role: "Trình dược viên"
+        );
       }
     );
   }
+
   
   
-
-
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

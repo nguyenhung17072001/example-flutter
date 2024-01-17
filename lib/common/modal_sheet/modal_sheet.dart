@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+//Note: declare assets/gonsa_character.png
+
 
 //TimekeepingFailModal
 class TimekeepingFailModal extends StatelessWidget {
@@ -13,11 +15,11 @@ class TimekeepingFailModal extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Text(
-            "Checkin Thất bại",
+            "Checkin Thất Bại",
             style: TextStyle(color: Color(0xffD10011), fontSize: 18, fontWeight: FontWeight.bold),
           ),
           Padding(
-            padding: const EdgeInsets.all(1.0),
+            padding: const EdgeInsets.all(10.0),
             child: Image.asset(
               "assets/gonsa_character.png",
               fit: BoxFit.contain,
@@ -103,14 +105,116 @@ class TimekeepingFailModal extends StatelessWidget {
 
 
 //TimekeepingSuccessModal
+// ignore: must_be_immutable
 class TimekeepingSuccessModal extends StatelessWidget {
-  const TimekeepingSuccessModal({super.key});
+  late String timekeepingStatus;
+  late String fullName;
+  late String role;
+  TimekeepingSuccessModal({
+    super.key, 
+    required this.timekeepingStatus, 
+    required this.fullName,
+    required this.role,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            timekeepingStatus,
+            style: const TextStyle(color: Color(0xff25B946), fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Image.asset(
+              "assets/avatar_test.png",
+              fit: BoxFit.contain,
+              height: 80,
+              width: 80,
+            ),
+          ),
+          Text(
+            fullName,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Color(0xff262626), fontSize: 16),
+          ),
+          Container(
+            margin: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: const Color(0xffFDEFDB),
+              borderRadius: BorderRadius.circular(100.0)
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+              child: Text(
+                role,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Color(0xffFF5E00), fontSize: 14),
+              ),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              "Chúc mừng bạn đã chấm công thành công lúc 06:45 hôm nay. Bạn là người thứ 2 trong ngày chấm công.",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0xff262626), fontSize: 14),
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              "Cảm ơn vì những đóng góp của bạn 🎉",
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Color(0xff262626), fontSize: 14),
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(16.0),
+                minimumSize: Size(
+                  MediaQuery.of(context).size.width *0.9, 
+                  40
+                ),
+                backgroundColor: const Color(0xffFDEFDB),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              onPressed: ()=>Navigator.of(context).pop(), 
+                child: const Text(
+                  "Trở về",
+                  style: TextStyle(
+                    color: Color(0xffFF5E00),
+                    fontSize: 14,
+                  ),
+                )
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+
+
+class MyWidget extends StatelessWidget {
+  const MyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
 }
+
 
 
 
