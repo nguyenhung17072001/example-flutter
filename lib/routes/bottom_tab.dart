@@ -14,12 +14,13 @@ class BottomTab extends StatefulWidget {
 
 class _BottomTabPageState extends State<BottomTab> {
   int _currentIndex = 0;
-
+  final PageController _pageController = PageController();
   // Danh sách các tab
   final List<Widget> _tabs = [
     const Home(),
     const Timekeeping(),
     const Log(),
+    const MediaManagement(),
     const MediaManagement(),
   
     
@@ -29,35 +30,51 @@ class _BottomTabPageState extends State<BottomTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
           });
+        },
+        children: _tabs,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          _pageController.animateToPage(
+            index,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeInOut,
+          );
         },
         items: const [
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Trang chủ',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
             icon: Icon(Icons.touch_app),
-            label: 'Attendance',
+            label: 'Đối tác',
             
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
             icon: Icon(Icons.filter_1),
-            label: 'Test',
+            label: 'Lịch',
           ),
           BottomNavigationBarItem(
             backgroundColor: Colors.amber,
             icon: Icon(Icons.person),
-            label: 'Menu',
+            label: 'CTKM',
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Colors.amber,
+            icon: Icon(Icons.person),
+            label: 'Đơn hàng',
           ),
         ],
       ),
