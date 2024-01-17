@@ -115,6 +115,19 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void _udateAvatartModal() async {
+    showModalBottomSheet(
+      showDragHandle: true,
+      useSafeArea: true,
+      isDismissible: true,
+      context: context, 
+      builder: (BuildContext context) {
+        return UpdateAvatartModal(
+          
+        );
+      }
+    );
+  }
 
   void _showDeleteAvatarDialog() async {
     showDialog(
@@ -177,6 +190,10 @@ class _HomeState extends State<Home> {
             TextButton(
               onPressed: _showDialog,
               child: const Text('Checkin đại lý'),
+            ),
+            TextButton(
+              onPressed: _udateAvatartModal,
+              child: const Text('Cập nhật ảnh đại diện'),
             ),
             TextButton(
               onPressed: _showDeleteAvatarDialog,

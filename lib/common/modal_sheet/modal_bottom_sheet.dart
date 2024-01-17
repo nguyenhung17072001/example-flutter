@@ -206,12 +206,52 @@ class TimekeepingSuccessModal extends StatelessWidget {
 
 
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class UpdateAvatartModal extends StatelessWidget {
+  const UpdateAvatartModal({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: const Icon(Icons.close, size: 24, color: Color(0xff7E8A9A),)
+              ),
+              const Text(
+                "Cập nhật ảnh đại diện",
+                style: TextStyle(
+                  color: Color(0xff262626), 
+                  fontSize: 16, 
+                  fontWeight: FontWeight.w600
+                ),
+              ),
+              const SizedBox(width: 24.0,)
+            ],
+          ),
+
+          TextButton.icon(
+            onPressed: (){}, 
+            icon: Container(
+              decoration: BoxDecoration(
+                color: Color(0xffFDEFDB)
+              ),
+              child: Icon(Icons.image),
+            ), 
+            label: Text("Tải ảnh trong thiết bị của bạn")
+          )
+          
+          
+          
+        ],
+      ),
+    );
   }
 }
 

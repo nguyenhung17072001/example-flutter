@@ -10,7 +10,7 @@ class AlertCheckin extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.white,
-      contentPadding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 20.0, bottom: 10.0), // Adjust padding as needed
+      contentPadding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 20.0, bottom: 10.0), 
       icon: Image.asset(
         "assets/alert_icon.png",
         height: 53.3,
@@ -94,6 +94,8 @@ class AlertCheckin extends StatelessWidget {
 }
 
 
+
+//AlertDeleteAvatar
 // ignore: must_be_immutable
 class AlertDeleteAvatar extends StatelessWidget {
   String? title;
