@@ -1,3 +1,4 @@
+import 'package:example/common/index.dart';
 import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -82,7 +83,10 @@ class _TimekeepingState extends State<Timekeeping> {
       'Location permissions are permanently denied, we cannot request permissions.');
   }
   }
-  
+
+
+
+  final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +107,17 @@ class _TimekeepingState extends State<Timekeeping> {
                 icon: Icon(Icons.touch_app),
               ),
             ),
+
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: AgentTextField(
+                controller: textEditingController,
+                labelText: 'Tên đối tác đầy đủ',
+                onChanged: (String text) {
+                  print(textEditingController.text);
+                },
+              ),
+            )
             
             
           ],

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 //Note: declare assets/gonsa_character.png
 
 
@@ -236,15 +238,82 @@ class UpdateAvatartModal extends StatelessWidget {
             ],
           ),
 
-          TextButton.icon(
-            onPressed: (){}, 
-            icon: Container(
-              decoration: BoxDecoration(
-                color: Color(0xffFDEFDB)
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+            child: TextButton.icon(
+              onPressed: (){}, 
+              icon: Container(
+                height: 41,
+                width: 41,
+                decoration: BoxDecoration(
+                  color: const Color(0xffFDEFDB),
+                  borderRadius: BorderRadius.circular(12.0)
+                ),
+                child: const Icon(Icons.image, size: 24, color: Color(0xffFF5E00),),
+              ), 
+              label: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Tải ảnh trong thiết bị của bạn",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Color(0xff595959),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
-              child: Icon(Icons.image),
-            ), 
-            label: Text("Tải ảnh trong thiết bị của bạn")
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(10.0),
+                minimumSize: Size(
+                  MediaQuery.of(context).size.width,  
+                  40
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
+          ),
+
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            child: TextButton.icon(
+              onPressed: (){}, 
+              icon: Container(
+                height: 41,
+                width: 41,
+                decoration: BoxDecoration(
+                  color: const Color(0xffFFEEEE),
+                  borderRadius: BorderRadius.circular(12.0)
+                ),
+                child: const Icon(CupertinoIcons.trash_fill, size: 24, color: Color(0xffD10011),),
+              ), 
+              label: const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Xóa ảnh đại diện hiện tại",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    color: Color(0xff595959),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(10.0),
+                minimumSize: Size(
+                  MediaQuery.of(context).size.width,  
+                  40
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+            ),
           )
           
           
