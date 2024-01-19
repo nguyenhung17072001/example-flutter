@@ -4,6 +4,7 @@ import 'package:example/utils/index.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
 
+      // ignore: use_build_context_synchronously
       bool openSettings = await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -69,17 +71,25 @@ class _MyAppState extends State<MyApp> {
             create: (BuildContext context) => AuthBloc(),
           ),
         ], 
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          navigatorKey: NavigatorUtils.instance.navigatorKey,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
-          initialRoute: AppRoutes.INIT,
-          routes: {
-            for (RouteModel e in AppPage.pages) e.name: (context) => e.page
-          },
-          navigatorObservers: [AppRouteTracking()],
+        child: ScreenUtilInit(
+          designSize: const Size(414, 1040),
+          minTextAdapt: true,
+          splitScreenMode: true,
+          
+          builder: (_ , child) {
+            return MaterialApp(
+              title: 'Flutter Demo',
+              navigatorKey: NavigatorUtils.instance.navigatorKey,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              initialRoute: AppRoutes.INIT,
+              routes: {
+                for (RouteModel e in AppPage.pages) e.name: (context) => e.page
+              },
+              navigatorObservers: [AppRouteTracking()],
+            );
+          }
         ),
       ),
     );

@@ -113,8 +113,20 @@ class _TimekeepingState extends State<Timekeeping> {
               child: AgentTextField(
                 controller: textEditingController,
                 labelText: 'Tên đối tác đầy đủ',
+                isObligatory: true,
                 onChanged: (String text) {
                   print(textEditingController.text);
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: AgentTextField(
+                //controller: textEditingController,
+                labelText: 'Tên viết tắt',
+                isObligatory: false,
+                onChanged: (String text) {
+                  print(text);
                 },
               ),
             )
