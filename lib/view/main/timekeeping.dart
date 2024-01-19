@@ -91,8 +91,10 @@ class _TimekeepingState extends State<Timekeeping> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          
           children: [
+            
             Container(
               child: TextButton.icon(
                 onPressed: checkIn,
@@ -107,7 +109,10 @@ class _TimekeepingState extends State<Timekeeping> {
                 icon: Icon(Icons.touch_app),
               ),
             ),
-
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: Text("Form đối tác đại lý")
+            ),
             Container(
               margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
               child: AgentTextField(
@@ -129,7 +134,17 @@ class _TimekeepingState extends State<Timekeeping> {
                   print(text);
                 },
               ),
-            )
+            ),
+            /* Container(
+              margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: AgentDropdownFormField()
+            ), */
+
+            Container(
+              margin: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+              child: Text("Form lên đơn")
+            ),
+
             
             
           ],

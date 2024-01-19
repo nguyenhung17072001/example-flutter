@@ -200,6 +200,17 @@ class _HomeState extends State<Home> {
               child: const Text('alert xóa ảnh đại diện'),
             ),
 
+            
+            Text('Lộ trình đi tuyến'),
+            
+            Expanded(
+              flex: 1,
+              child: WorkRoute(
+                routeName: "Tuyến Gonsa 1 Q1/2024 ghfy y  ",
+                progress: "7/15",
+                child: Text("hung")
+              ),
+            )
           ],
         )
       ),
