@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //timekeeping camera 
-  
+  late List items = [{}, {}];
   XFile? imageFile;
   List<CameraDescription> cameras = [];
 
@@ -148,70 +148,80 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextButton(
-              onPressed: testLocalAuth,
-              child: Text('Test Sinh trắc học'),
-            ),
-            Column(
-              children: [
-                
-                TextButton(
-                  onPressed: _getTimekeepingCamera,
-                  child: const Text('Camera chấm công'),
-                ),
-                Container(
-                  child: imageFile != null
-                  ? Image.file(
-                    File(imageFile!.path),
-                    width: 60, 
-                    height: 60,
-                    fit: BoxFit.cover,
-                  )
-                  : const SizedBox(),
-                ),
-              ],
-            ),
-
-            TextButton(
-              onPressed: _getPartnerCamera,
-              child: const Text('Camera đối tác theo tuyến'),
-            ),
-            TextButton(
-              onPressed: _showFailModal,
-              child: const Text('modal điểm danh thất bại '),
-            ),
-            TextButton(
-              onPressed: _showSuccessModal,
-              child: const Text('modal điểm danh thành công '),
-            ),
-            TextButton(
-              onPressed: _showDialog,
-              child: const Text('Checkin đại lý'),
-            ),
-            TextButton(
-              onPressed: _udateAvatartModal,
-              child: const Text('Cập nhật ảnh đại diện'),
-            ),
-            TextButton(
-              onPressed: _showDeleteAvatarDialog,
-              child: const Text('alert xóa ảnh đại diện'),
-            ),
-
+        child: Flexible(
+          child: Column(
             
-            Text('Lộ trình đi tuyến'),
-            
-            Expanded(
-              flex: 1,
-              child: WorkRoute(
-                routeName: "Tuyến Gonsa 1 Q1/2024 ghfy y  ",
-                progress: "7/15",
-                child: Text("hung")
+            children: [
+              TextButton(
+                onPressed: testLocalAuth,
+                child: Text('Test Sinh trắc học'),
               ),
-            )
-          ],
+              Column(
+                children: [
+                  
+                  TextButton(
+                    onPressed: _getTimekeepingCamera,
+                    child: const Text('Camera chấm công'),
+                  ),
+                  Container(
+                    child: imageFile != null
+                    ? Image.file(
+                      File(imageFile!.path),
+                      width: 60, 
+                      height: 60,
+                      fit: BoxFit.cover,
+                    )
+                    : const SizedBox(),
+                  ),
+                ],
+              ),
+          
+              TextButton(
+                onPressed: _getPartnerCamera,
+                child: const Text('Camera đối tác theo tuyến'),
+              ),
+              TextButton(
+                onPressed: _showFailModal,
+                child: const Text('modal điểm danh thất bại '),
+              ),
+              TextButton(
+                onPressed: _showSuccessModal,
+                child: const Text('modal điểm danh thành công '),
+              ),
+              TextButton(
+                onPressed: _showDialog,
+                child: const Text('Checkin đại lý'),
+              ),
+              TextButton(
+                onPressed: _udateAvatartModal,
+                child: const Text('Cập nhật ảnh đại diện'),
+              ),
+              TextButton(
+                onPressed: _showDeleteAvatarDialog,
+                child: const Text('alert xóa ảnh đại diện'),
+              ),
+          
+              
+              Text('Lộ trình đi tuyến'),
+              
+              Flexible(
+                flex: 2,
+                child: WorkRoute(
+                  routeName: "Tuyến Gonsa 1 Q1/2024",
+                  progress: "7/15",
+                  
+                ),
+              ),
+              Expanded(
+                //flex: 1,
+                child: WorkRoute(
+                  routeName: "Tuyến Gonsa 1 Q1/2024",
+                  progress: "7/15",
+                  
+                ),
+              )
+            ],
+          ),
         )
       ),
     );

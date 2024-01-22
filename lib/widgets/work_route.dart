@@ -21,7 +21,7 @@ class WorkRoute extends StatefulWidget {
 class _WorkRouteState extends State<WorkRoute> {
   late String _routeName;
   late String _progress;
-  late Widget? _child;
+  late Widget? _child; 
 
   late bool _isContent = false;
   
@@ -91,11 +91,24 @@ class _WorkRouteState extends State<WorkRoute> {
               backgroundColor: MaterialStateProperty.all<Color>(const Color(0xffF2F5F8)),
             ),
           ),
-          if (_child != null && _isContent) ...[_child!],
+          
+          if (_child != null && _isContent) 
+          ...[Expanded(
+            child: Container(
+              color: const Color(0xffF2F5F8),
+              child: _child!,
+            )
+            
+          )],
          
         ],
       ),
     );
   }
 }
+
+
+
+
+
 

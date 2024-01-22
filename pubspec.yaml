@@ -119,6 +119,11 @@ flutter:
     - assets/ctkm_bar_icon.png
     - assets/order_bar_icon.png
 
+    # agency item icon
+    - assets/agency_report_icon.png
+    - assets/agency_visit_icon.png
+    - assets/agency_order_icon.png
+
     
 
     #- images/a_dot_ham.jpeg
