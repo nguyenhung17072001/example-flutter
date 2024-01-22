@@ -1,34 +1,41 @@
-import 'package:example/flow/blocs/bloc_observer.dart';
-import 'package:example/flow/blocs/order_bloc.dart';
+
+import 'package:camera/camera.dart';
+import 'package:example/utils/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'flow/blocs/authen_bloc.dart';
-import 'src/navigation/navigation_container.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'di/injection_container.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'my_app.dart';
 
 
-void main() {
-  Bloc.observer = BlocObserver2();
-  runApp(MyApp());
+
+
+void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  await Firebase.initializeApp(
+    options: FirebaseConfig.android
+  );
+  SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+  
+  var canAuthenticate = await BiometricUtils.instance.checkBiometrics();
+  print('canAuthenticateWithBiometrics========: $canAuthenticate');
+  
+  //const flavor = String.fromEnvironment('flavor', defaultValue: 'dev');
+   
+  
+
+
+
+  runApp(const MyApp());
+  
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context)=>OrderBloc(),
-        ),
-        BlocProvider(
-          create: (context)=>AuthenBloc(),
-        ),
-        
-      ],
-      child: MaterialApp(
-        home: NavigationContainer(),
-    ),
-    );
-  }
-}
+
 
 
